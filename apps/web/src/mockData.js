@@ -18,6 +18,9 @@ export const homeProfile = {
   languages: ["English", "Amharic"],
   brandName: "AFH Cares",
   brandInitials: "AC",
+  neighborhoodNote: "A peaceful residential setting near South Seattle",
+  signatureNote:
+    "A smaller home environment can feel gentler, more personal, and easier to trust. This prototype leans into that feeling instead of sounding like a facility brochure.",
   quickFacts: [
     "Private and companion room options",
     "24-hour support in a secure home setting",
@@ -79,6 +82,27 @@ export const livingFeatures = [
     title: "Open family communication",
     description:
       "Families want reassurance that they will be kept informed. This area can reinforce transparency, responsiveness, and a smooth introduction to the home."
+  }
+];
+
+export const experienceSteps = [
+  {
+    step: "01",
+    title: "Reach out for an initial conversation",
+    description:
+      "Families can call, email, or request a visit to talk through care needs, timing, and what kind of home environment feels right."
+  },
+  {
+    step: "02",
+    title: "Tour the home and ask direct questions",
+    description:
+      "The website should make that next step feel natural, with clear invitations to see the space, meet the caregivers, and understand the rhythm of care."
+  },
+  {
+    step: "03",
+    title: "Move forward only if it feels like a fit",
+    description:
+      "The tone stays calm and pressure-free. Trust is built through clarity, warmth, and honest communication."
   }
 ];
 

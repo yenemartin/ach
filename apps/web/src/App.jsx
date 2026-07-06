@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import {
   careHighlights,
   defaultTheme,
+  experienceSteps,
   faqs,
   galleryImages,
   homeProfile,
@@ -353,6 +354,21 @@ export default function App() {
 
   return (
     <main className="site-shell">
+      <header className="topbar">
+        <div className="brand-lockup">
+          <div className="brand-monogram">{homeProfile.brandInitials}</div>
+          <div>
+            <strong>{homeProfile.brandName}</strong>
+            <p>{homeProfile.neighborhoodNote}</p>
+          </div>
+        </div>
+        <nav className="topnav" aria-label="Primary">
+          <a href="#story">About</a>
+          <a href="#gallery">Photos</a>
+          <a href="#contact">Contact</a>
+        </nav>
+      </header>
+
       <section className="hero">
         <div className="hero-copy">
           <p className="eyebrow">Adult Family Home</p>
@@ -366,6 +382,10 @@ export default function App() {
             <a className="button button-secondary" href={`tel:${homeProfile.phoneHref}`}>
               Call {homeProfile.phone}
             </a>
+          </div>
+          <div className="signature-note">
+            <span className="signature-line" />
+            <p>{homeProfile.signatureNote}</p>
           </div>
           <ul className="hero-points">
             {homeProfile.quickFacts.map((item) => (
@@ -389,6 +409,11 @@ export default function App() {
               <strong>Thoughtful design for daily ease</strong>
             </div>
           </article>
+          <article className="hero-stat-card">
+            <p className="hero-stat-label">Family-first focus</p>
+            <strong>24/7 support</strong>
+            <span>Clear communication, calm routines, and a home that feels personal.</span>
+          </article>
         </div>
       </section>
 
@@ -409,7 +434,7 @@ export default function App() {
 
       <BrandStudio />
 
-      <section className="content-section two-column">
+      <section className="content-section two-column" id="story">
         <div>
           <p className="eyebrow">Why families choose us</p>
           <h2>Care that feels personal, clear, and reassuring from the first call.</h2>
@@ -423,6 +448,25 @@ export default function App() {
               <p>{item.description}</p>
             </article>
           ))}
+        </div>
+      </section>
+
+      <section className="content-section editorial-panel">
+        <div className="editorial-copy">
+          <p className="eyebrow">Our approach</p>
+          <h2>Warmth, safety, and dignity should be visible before a family ever calls.</h2>
+          <p className="section-copy">
+            The strongest adult family home websites do more than list features. They reduce
+            anxiety. They help a visitor imagine their loved one in a clean, calm, and respectful
+            setting, and they make the next step feel easy.
+          </p>
+        </div>
+        <div className="editorial-aside">
+          <p>
+            Small details matter here: the tone of the copy, the softness of the colors, the
+            amount of breathing room, and the way contact actions stay visible without feeling
+            aggressive.
+          </p>
         </div>
       </section>
 
@@ -443,7 +487,25 @@ export default function App() {
         </div>
       </section>
 
-      <section className="content-section gallery-section">
+      <section className="content-section journey-section">
+        <div className="section-heading">
+          <div>
+            <p className="eyebrow">What families experience</p>
+            <h2>A calmer, more guided path from first visit to real conversation.</h2>
+          </div>
+        </div>
+        <div className="journey-grid">
+          {experienceSteps.map((item) => (
+            <article key={item.step} className="journey-card">
+              <span>{item.step}</span>
+              <h3>{item.title}</h3>
+              <p>{item.description}</p>
+            </article>
+          ))}
+        </div>
+      </section>
+
+      <section className="content-section gallery-section" id="gallery">
         <div className="section-heading">
           <div>
             <p className="eyebrow">Gallery</p>
@@ -470,6 +532,12 @@ export default function App() {
             <p className="eyebrow">Family confidence</p>
             <h2>The site should make families feel safe reaching out.</h2>
           </div>
+        </div>
+        <div className="pull-quote">
+          <p>
+            “The best version of this site should feel less like a facility search result and more
+            like being welcomed into a well-kept home.”
+          </p>
         </div>
         <div className="testimonial-grid">
           {testimonials.map((item) => (
