@@ -1,14 +1,14 @@
 <svg width="640" height="220" viewBox="0 0 640 220" fill="none" xmlns="http://www.w3.org/2000/svg">
-  <rect width="640" height="220" rx="28" fill="#FFF8F1"/>
+  <rect width="640" height="220" rx="28" fill="#F7FAFF"/>
   <g transform="translate(46 28)">
-    <circle cx="86" cy="62" r="36" fill="#E2A15E"/>
-    <path d="M42 92C58 72 83 60 112 60C141 60 165 72 180 92" stroke="#8D6B54" stroke-width="10" stroke-linecap="round"/>
-    <path d="M120 32L180 84H161V136H79V84H60L120 32Z" fill="#B55A37"/>
-    <path d="M98 136V100C98 90.6112 105.611 83 115 83H125C134.389 83 142 90.6112 142 100V136H98Z" fill="#F6E8D8"/>
-    <path d="M154 136C162 111 180 92 208 86C224 82 239 84 254 88C228 103 217 126 212 136H154Z" fill="#7B8F67"/>
+    <circle cx="86" cy="62" r="36" fill="#E24A4A"/>
+    <path d="M42 92C58 72 83 60 112 60C141 60 165 72 180 92" stroke="#2C64B7" stroke-width="10" stroke-linecap="round"/>
+    <path d="M120 32L180 84H161V136H79V84H60L120 32Z" fill="#2C64B7"/>
+    <path d="M98 136V100C98 90.6112 105.611 83 115 83H125C134.389 83 142 90.6112 142 100V136H98Z" fill="#F2F7FF"/>
+    <path d="M154 136C162 111 180 92 208 86C224 82 239 84 254 88C228 103 217 126 212 136H154Z" fill="#E24A4A"/>
   </g>
-  <text x="248" y="102" fill="#A24D2A" font-family="Georgia, serif" font-size="54" letter-spacing="0.5">Harbor Hearth</text>
-  <text x="250" y="144" fill="#7B8F67" font-family="Arial, sans-serif" font-size="20" letter-spacing="7">ADULT FAMILY HOME</text>
-  <path d="M248 162H585" stroke="#D5B18A" stroke-width="2"/>
-  <text x="248" y="190" fill="#6A6258" font-family="Arial, sans-serif" font-size="15">Compassionate 24-hour support in a warm residential setting</text>
+  <text x="248" y="102" fill="#1F4E9E" font-family="Georgia, serif" font-size="54" letter-spacing="0.5">Harbor Hearth</text>
+  <text x="250" y="144" fill="#D94A4A" font-family="Arial, sans-serif" font-size="20" letter-spacing="7">ADULT FAMILY HOME</text>
+  <path d="M248 162H585" stroke="#8DB4F0" stroke-width="2"/>
+  <text x="248" y="190" fill="#526173" font-family="Arial, sans-serif" font-size="15">Compassionate 24-hour support in a warm residential setting</text>
 </svg>

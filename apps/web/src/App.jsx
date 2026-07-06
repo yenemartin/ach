@@ -174,6 +174,57 @@ async function extractThemeFromLogo(file) {
   }
 }
 
+async function extractThemeFromImageUrl(imageUrl) {
+  const image = await new Promise((resolve, reject) => {
+    const nextImage = new Image();
+    nextImage.onload = () => resolve(nextImage);
+    nextImage.onerror = () => reject(new Error("Unable to read logo image."));
+    nextImage.src = imageUrl;
+  });
+
+  const canvas = document.createElement("canvas");
+  const context = canvas.getContext("2d", { willReadFrequently: true });
+
+  if (!context) {
+    throw new Error("Canvas is not available in this browser.");
+  }
+
+  const maxSize = 80;
+  const ratio = Math.min(maxSize / image.width, maxSize / image.height, 1);
+  canvas.width = Math.max(1, Math.round(image.width * ratio));
+  canvas.height = Math.max(1, Math.round(image.height * ratio));
+  context.drawImage(image, 0, 0, canvas.width, canvas.height);
+
+  const { data } = context.getImageData(0, 0, canvas.width, canvas.height);
+  const swatches = new Map();
+
+  for (let index = 0; index < data.length; index += 4) {
+    const alpha = data[index + 3];
+
+    if (alpha < 180) {
+      continue;
+    }
+
+    const r = Math.round(data[index] / 24) * 24;
+    const g = Math.round(data[index + 1] / 24) * 24;
+    const b = Math.round(data[index + 2] / 24) * 24;
+    const hex = rgbToHex(r, g, b);
+
+    if (isNearWhite(hex) || isNearBlack(hex)) {
+      continue;
+    }
+
+    const scoreBoost = Math.abs(r - g) + Math.abs(g - b) + Math.abs(r - b);
+    swatches.set(hex, (swatches.get(hex) || 0) + 1 + scoreBoost / 200);
+  }
+
+  const dominant = [...swatches.entries()]
+    .sort((left, right) => right[1] - left[1])
+    .map(([hex]) => hex)[0];
+
+  return dominant ? buildThemeFromAccent(dominant) : defaultTheme;
+}
+
 function ContactForm() {
   const [formState, setFormState] = useState({
     name: "",
@@ -349,7 +400,13 @@ export default function App() {
       descriptionTag.setAttribute("content", homeProfile.seoDescription);
     }
 
-    applyTheme(defaultTheme);
+    if (homeProfile.logo) {
+      extractThemeFromImageUrl(homeProfile.logo)
+        .then((theme) => applyTheme(theme))
+        .catch(() => applyTheme(defaultTheme));
+    } else {
+      applyTheme(defaultTheme);
+    }
   }, []);
 
   return (
