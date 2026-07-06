@@ -40,6 +40,16 @@ The actual forwarding destination is configured in Cloudflare Pages with the env
 
 - `INQUIRY_WEBHOOK_URL`
 
+Recommended value format when using the repo's Cloudflare Worker:
+
+```text
+https://afhcares-inquiry-worker.<your-subdomain>.workers.dev/capture?token=<INBOUND_TOKEN>
+```
+
+See:
+
+- `docs/cloudflare-inquiry-worker.md`
+
 Example home config:
 
 ```js

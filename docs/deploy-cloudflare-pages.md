@@ -43,7 +43,12 @@ In Cloudflare Pages, add this environment variable:
 
 - `INQUIRY_WEBHOOK_URL`
 
-That webhook can point to the destination you want to use for lead delivery, such as:
+Recommended low-cost option:
+
+- point it to the Cloudflare Inquiry Worker capture URL described in:
+  - `docs/cloudflare-inquiry-worker.md`
+
+That webhook can also point to another destination you want to use for lead delivery, such as:
 
 - a private automation endpoint
 - a Google Apps Script webhook
