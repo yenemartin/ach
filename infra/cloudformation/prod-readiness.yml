@@ -1,0 +1,157 @@
+AWSTemplateFormatVersion: "2010-09-09"
+Description: AFH Cares prod-readiness environment.
+
+Parameters:
+  EnvironmentName:
+    Type: String
+    Default: prod-readiness
+  ApiCodeBucketName:
+    Type: String
+  ApiCodeObjectKey:
+    Type: String
+
+Resources:
+  HomesTable:
+    Type: AWS::DynamoDB::Table
+    Properties:
+      TableName: !Sub afh-cares-${EnvironmentName}-homes
+      BillingMode: PAY_PER_REQUEST
+      AttributeDefinitions:
+        - AttributeName: id
+          AttributeType: S
+      KeySchema:
+        - AttributeName: id
+          KeyType: HASH
+
+  InquiriesTable:
+    Type: AWS::DynamoDB::Table
+    Properties:
+      TableName: !Sub afh-cares-${EnvironmentName}-inquiries
+      BillingMode: PAY_PER_REQUEST
+      AttributeDefinitions:
+        - AttributeName: id
+          AttributeType: S
+      KeySchema:
+        - AttributeName: id
+          KeyType: HASH
+
+  ApiRole:
+    Type: AWS::IAM::Role
+    Properties:
+      AssumeRolePolicyDocument:
+        Version: "2012-10-17"
+        Statement:
+          - Effect: Allow
+            Principal:
+              Service: lambda.amazonaws.com
+            Action: sts:AssumeRole
+      ManagedPolicyArns:
+        - arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole
+      Policies:
+        - PolicyName: afh-cares-prod-readiness-ddb
+          PolicyDocument:
+            Version: "2012-10-17"
+            Statement:
+              - Effect: Allow
+                Action:
+                  - dynamodb:BatchWriteItem
+                  - dynamodb:GetItem
+                  - dynamodb:PutItem
+                  - dynamodb:Scan
+                  - dynamodb:UpdateItem
+                Resource:
+                  - !GetAtt HomesTable.Arn
+                  - !GetAtt InquiriesTable.Arn
+
+  ApiFunction:
+    Type: AWS::Lambda::Function
+    Properties:
+      Runtime: nodejs20.x
+      Handler: src/router.handler
+      Role: !GetAtt ApiRole.Arn
+      Timeout: 10
+      MemorySize: 256
+      Code:
+        S3Bucket: !Ref ApiCodeBucketName
+        S3Key: !Ref ApiCodeObjectKey
+      Environment:
+        Variables:
+          HOMES_TABLE: !Ref HomesTable
+          INQUIRIES_TABLE: !Ref InquiriesTable
+
+  ApiFunctionUrl:
+    Type: AWS::Lambda::Url
+    Properties:
+      AuthType: NONE
+      TargetFunctionArn: !Ref ApiFunction
+
+  LambdaFunctionUrlPermission:
+    Type: AWS::Lambda::Permission
+    Properties:
+      Action: lambda:InvokeFunctionUrl
+      FunctionName: !Ref ApiFunction
+      FunctionUrlAuthType: NONE
+      Principal: "*"
+
+  FrontendDistribution:
+    Type: AWS::CloudFront::Distribution
+    Properties:
+      DistributionConfig:
+        Enabled: true
+        Comment: !Sub afh-cares ${EnvironmentName}
+        DefaultRootObject: index.html
+        HttpVersion: http2and3
+        PriceClass: PriceClass_100
+        Origins:
+          - Id: AppOrigin
+            DomainName: !Select [2, !Split ["/", !GetAtt ApiFunctionUrl.FunctionUrl]]
+            CustomOriginConfig:
+              OriginProtocolPolicy: https-only
+              HTTPSPort: 443
+              OriginSSLProtocols:
+                - TLSv1.2
+        DefaultCacheBehavior:
+          TargetOriginId: AppOrigin
+          ViewerProtocolPolicy: redirect-to-https
+          AllowedMethods:
+            - GET
+            - HEAD
+            - OPTIONS
+          CachedMethods:
+            - GET
+            - HEAD
+          Compress: true
+          CachePolicyId: 4135ea2d-6df8-44a3-9df3-4b5a84be39ad
+          OriginRequestPolicyId: 216adef6-5c7f-47e4-b989-5492eafa07d3
+        CacheBehaviors:
+          - PathPattern: /api*
+            TargetOriginId: AppOrigin
+            ViewerProtocolPolicy: redirect-to-https
+            AllowedMethods:
+              - GET
+              - HEAD
+              - OPTIONS
+              - PUT
+              - POST
+              - PATCH
+              - DELETE
+            CachedMethods:
+              - GET
+              - HEAD
+            Compress: true
+            CachePolicyId: 4135ea2d-6df8-44a3-9df3-4b5a84be39ad
+            OriginRequestPolicyId: 216adef6-5c7f-47e4-b989-5492eafa07d3
+
+Outputs:
+  EnvironmentName:
+    Value: !Ref EnvironmentName
+  FrontendDistributionId:
+    Value: !Ref FrontendDistribution
+  FrontendDistributionDomainName:
+    Value: !GetAtt FrontendDistribution.DomainName
+  ApiBaseUrl:
+    Value: !GetAtt ApiFunctionUrl.FunctionUrl
+  HomesTableName:
+    Value: !Ref HomesTable
+  InquiriesTableName:
+    Value: !Ref InquiriesTable

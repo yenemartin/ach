@@ -1,0 +1,14 @@
+{
+  "name": "afh-cares-api",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "scripts": {
+    "dev": "node src/dev-server.js",
+    "check": "node --check src/handlers/public.js && node --check src/handlers/admin.js && node --check src/dev-server.js"
+  },
+  "dependencies": {
+    "@aws-sdk/client-dynamodb": "^3.1079.0",
+    "@aws-sdk/lib-dynamodb": "^3.1079.0"
+  }
+}
