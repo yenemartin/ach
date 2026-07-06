@@ -1,5 +1,8 @@
 import { useEffect, useState } from "react";
-import {
+import { getSelectedHome } from "./homes";
+
+const selectedHome = getSelectedHome();
+const {
   careHighlights,
   defaultTheme,
   experienceSteps,
@@ -7,7 +10,7 @@ import {
   galleryImages,
   homeProfile,
   livingFeatures
-} from "./mockData";
+} = selectedHome;
 
 function clamp(value, min, max) {
   return Math.min(Math.max(value, min), max);
