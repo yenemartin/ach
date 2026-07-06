@@ -28,8 +28,8 @@ export const homeProfile = {
     "24-hour support in a secure residential setting",
     "Family-centered communication and calm daily routines"
   ],
-  heroImage: "/brand/hero-home.svg",
-  secondaryImage: "/brand/bedroom.svg",
+  heroImage: "/brand/harbor-hearth-exterior.png",
+  secondaryImage: "/brand/harbor-hearth-bedroom.png",
   logo: "/brand/harbor-hearth-logo.svg"
 };
 
@@ -169,20 +169,20 @@ export const galleryImages = [
   {
     title: "Welcoming exterior",
     caption: "A quiet residential setting with a calm, approachable feel.",
-    alt: "Illustrated exterior view of Harbor Hearth Adult Family Home",
-    src: "/brand/hero-home.svg"
+    alt: "Exterior view of Harbor Hearth Adult Family Home",
+    src: "/brand/harbor-hearth-exterior.png"
   },
   {
     title: "Shared living room",
     caption: "A bright common area for conversation, rest, and daily comfort.",
-    alt: "Illustrated living room inside Harbor Hearth Adult Family Home",
-    src: "/brand/living-room.svg"
+    alt: "Shared living room inside Harbor Hearth Adult Family Home",
+    src: "/brand/harbor-hearth-living-room.png"
   },
   {
     title: "Private room option",
     caption: "A simple, restful room designed to feel comfortable and home-like.",
-    alt: "Illustrated private bedroom inside Harbor Hearth Adult Family Home",
-    src: "/brand/bedroom.svg"
+    alt: "Private bedroom inside Harbor Hearth Adult Family Home",
+    src: "/brand/harbor-hearth-bedroom.png"
   }
 ];
 
