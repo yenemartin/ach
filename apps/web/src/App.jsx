@@ -310,9 +310,7 @@ function ContactForm() {
   );
 }
 
-function GallerySection() {
-  const [activeIndex, setActiveIndex] = useState(0);
-  const [lightboxIndex, setLightboxIndex] = useState(null);
+function GallerySection({ activeIndex, lightboxIndex, onActiveIndexChange, onLightboxChange }) {
   const activeImage = galleryImages[activeIndex];
   const lightboxImage = lightboxIndex === null ? null : galleryImages[lightboxIndex];
 
@@ -322,7 +320,7 @@ function GallerySection() {
     }
 
     const intervalId = window.setInterval(() => {
-      setActiveIndex((current) => (current + 1) % galleryImages.length);
+      onActiveIndexChange((current) => (current + 1) % galleryImages.length);
     }, 4200);
 
     return () => window.clearInterval(intervalId);
@@ -338,15 +336,15 @@ function GallerySection() {
 
     const handleKeyDown = (event) => {
       if (event.key === "Escape") {
-        setLightboxIndex(null);
+        onLightboxChange(null);
       }
 
       if (event.key === "ArrowRight") {
-        setLightboxIndex((current) => ((current ?? 0) + 1) % galleryImages.length);
+        onLightboxChange((current) => ((current ?? 0) + 1) % galleryImages.length);
       }
 
       if (event.key === "ArrowLeft") {
-        setLightboxIndex((current) => ((current ?? 0) - 1 + galleryImages.length) % galleryImages.length);
+        onLightboxChange((current) => ((current ?? 0) - 1 + galleryImages.length) % galleryImages.length);
       }
     };
 
@@ -359,28 +357,28 @@ function GallerySection() {
   }, [lightboxIndex]);
 
   const openLightbox = (index) => {
-    setActiveIndex(index);
-    setLightboxIndex(index);
+    onActiveIndexChange(index);
+    onLightboxChange(index);
   };
 
   const goToSlide = (index) => {
-    setActiveIndex(index);
+    onActiveIndexChange(index);
   };
 
   const goToNext = () => {
-    setActiveIndex((current) => (current + 1) % galleryImages.length);
+    onActiveIndexChange((current) => (current + 1) % galleryImages.length);
   };
 
   const goToPrevious = () => {
-    setActiveIndex((current) => (current - 1 + galleryImages.length) % galleryImages.length);
+    onActiveIndexChange((current) => (current - 1 + galleryImages.length) % galleryImages.length);
   };
 
   const goToNextLightbox = () => {
-    setLightboxIndex((current) => ((current ?? 0) + 1) % galleryImages.length);
+    onLightboxChange((current) => ((current ?? 0) + 1) % galleryImages.length);
   };
 
   const goToPreviousLightbox = () => {
-    setLightboxIndex((current) => ((current ?? 0) - 1 + galleryImages.length) % galleryImages.length);
+    onLightboxChange((current) => ((current ?? 0) - 1 + galleryImages.length) % galleryImages.length);
   };
 
   return (
@@ -449,14 +447,14 @@ function GallerySection() {
         <div
           aria-label="Image viewer"
           className="lightbox-backdrop"
-          onClick={() => setLightboxIndex(null)}
+          onClick={() => onLightboxChange(null)}
           role="dialog"
         >
           <div className="lightbox-shell" onClick={(event) => event.stopPropagation()} role="document">
             <button
               aria-label="Close image viewer"
               className="lightbox-close"
-              onClick={() => setLightboxIndex(null)}
+              onClick={() => onLightboxChange(null)}
               type="button"
             >
               ×
@@ -492,7 +490,14 @@ function GallerySection() {
 }
 
 export default function App() {
+  const [activeGalleryIndex, setActiveGalleryIndex] = useState(0);
+  const [lightboxIndex, setLightboxIndex] = useState(null);
   const [navPinned, setNavPinned] = useState(false);
+
+  const openPhotoTour = (index = 0) => {
+    setActiveGalleryIndex(index);
+    setLightboxIndex(index);
+  };
 
   useEffect(() => {
     document.title = homeProfile.seoTitle;
@@ -608,13 +613,18 @@ export default function App() {
               <strong>Comfort, dignity, and a calm daily rhythm</strong>
             </div>
           </article>
-          <article className="hero-video-card reveal-up is-visible" data-reveal>
+          <button
+            className="hero-video-card reveal-up is-visible"
+            data-reveal
+            onClick={() => openPhotoTour(0)}
+            type="button"
+          >
             <div className="hero-video-icon">▶</div>
             <div>
               <p className="hero-video-label">Home tour feel</p>
               <strong>See the environment before the first visit</strong>
             </div>
-          </article>
+          </button>
           <article className="hero-card hero-card-accent reveal-up is-visible" data-reveal>
             <img alt="Peaceful bedroom" src={homeProfile.secondaryImage} />
             <div className="hero-card-copy">
@@ -762,13 +772,18 @@ export default function App() {
             </a>
           </div>
         </div>
-        <div className="tour-spotlight-media reveal-right" data-reveal>
+        <button
+          className="tour-spotlight-media reveal-right"
+          data-reveal
+          onClick={() => openPhotoTour(0)}
+          type="button"
+        >
           <img alt={galleryImages[0]?.alt || homeProfile.name} src={galleryImages[0]?.src || homeProfile.heroImage} />
           <div className="tour-spotlight-chip">
             <span>Photo highlights</span>
             <strong>{galleryImages.length} spaces to explore</strong>
           </div>
-        </div>
+        </button>
       </section>
 
       <section className="content-section atmosphere-split reveal-up" data-reveal>
@@ -832,7 +847,12 @@ export default function App() {
         </div>
       </section>
 
-      <GallerySection />
+      <GallerySection
+        activeIndex={activeGalleryIndex}
+        lightboxIndex={lightboxIndex}
+        onActiveIndexChange={setActiveGalleryIndex}
+        onLightboxChange={setLightboxIndex}
+      />
 
       <section className="content-section faq-layout reveal-up" data-reveal>
         <div>
