@@ -10,6 +10,7 @@ const {
   faqs,
   galleryImages,
   homeProfile,
+  serviceHighlights,
   livingFeatures
 } = selectedHome;
 
@@ -509,9 +510,36 @@ export default function App() {
     }
   }, []);
 
+  useEffect(() => {
+    const revealNodes = [...document.querySelectorAll("[data-reveal]")];
+
+    if (!revealNodes.length) {
+      return undefined;
+    }
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("is-visible");
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      {
+        threshold: 0.16,
+        rootMargin: "0px 0px -8% 0px"
+      }
+    );
+
+    revealNodes.forEach((node) => observer.observe(node));
+
+    return () => observer.disconnect();
+  }, []);
+
   return (
     <main className="site-shell">
-      <header className="topbar">
+      <header className="topbar reveal-up is-visible" data-reveal>
         <div className="brand-lockup">
           {homeProfile.logo ? (
             <img className="brand-logo" alt={`${homeProfile.brandName} logo`} src={homeProfile.logo} />
@@ -528,10 +556,13 @@ export default function App() {
           <a href="#gallery">Photos</a>
           <a href="#contact">Contact</a>
         </nav>
+        <a className="topbar-cta" href="#contact">
+          Schedule a Tour
+        </a>
       </header>
 
-      <section className="hero">
-        <div className="hero-copy">
+      <section className="hero reveal-up is-visible" data-reveal>
+        <div className="hero-copy reveal-up is-visible" data-reveal>
           <p className="eyebrow">Adult Family Home</p>
           <h1>{homeProfile.name}</h1>
           <p className="hero-lede">{homeProfile.tagline}</p>
@@ -556,21 +587,21 @@ export default function App() {
         </div>
 
         <div className="hero-visual">
-          <article className="hero-card hero-card-main">
+          <article className="hero-card hero-card-main reveal-right is-visible" data-reveal>
             <img alt="Bright adult family home living room" src={homeProfile.heroImage} />
             <div className="hero-card-copy">
               <p>Shared spaces</p>
               <strong>Comfort, dignity, and a calm daily rhythm</strong>
             </div>
           </article>
-          <article className="hero-card hero-card-accent">
+          <article className="hero-card hero-card-accent reveal-up is-visible" data-reveal>
             <img alt="Peaceful bedroom" src={homeProfile.secondaryImage} />
             <div className="hero-card-copy">
               <p>Private room options</p>
               <strong>Quiet rooms designed for rest and ease</strong>
             </div>
           </article>
-          <article className="hero-stat-card">
+          <article className="hero-stat-card reveal-left is-visible" data-reveal>
             <p className="hero-stat-label">Care approach</p>
             <strong>24/7 support</strong>
             <span>Steady routines, clear communication, and a home that feels personal.</span>
@@ -578,7 +609,17 @@ export default function App() {
         </div>
       </section>
 
-      <section className="trust-strip">
+      <section className="care-marquee reveal-up" data-reveal>
+        <div className="care-marquee-track">
+          {serviceHighlights.concat(serviceHighlights).map((item, index) => (
+            <span key={`${item}-${index}`} className="care-marquee-item">
+              {item}
+            </span>
+          ))}
+        </div>
+      </section>
+
+      <section className="trust-strip reveal-up" data-reveal>
         <div>
           <p className="trust-value">{homeProfile.city}</p>
           <span>Residential neighborhood setting</span>
@@ -593,15 +634,20 @@ export default function App() {
         </div>
       </section>
 
-      <section className="content-section two-column" id="story">
+      <section className="content-section two-column reveal-up" data-reveal id="story">
         <div>
           <p className="eyebrow">About {homeProfile.brandName}</p>
           <h2>A smaller home setting with a more personal pace of care.</h2>
           <p className="section-copy">{homeProfile.story}</p>
         </div>
         <div className="feature-grid">
-          {careHighlights.map((item) => (
-            <article key={item.title} className="feature-card">
+          {careHighlights.map((item, index) => (
+            <article
+              key={item.title}
+              className="feature-card reveal-up"
+              data-reveal
+              style={{ "--reveal-delay": `${index * 90}ms` }}
+            >
               <p className="feature-kicker">{item.kicker}</p>
               <h3>{item.title}</h3>
               <p>{item.description}</p>
@@ -610,8 +656,8 @@ export default function App() {
         </div>
       </section>
 
-      <section className="content-section editorial-panel">
-        <div className="editorial-copy">
+      <section className="content-section editorial-panel reveal-up" data-reveal>
+        <div className="editorial-copy reveal-left" data-reveal>
           <p className="eyebrow">Our approach</p>
           <h2>We believe care should feel respectful, steady, and home-like.</h2>
           <p className="section-copy">
@@ -620,7 +666,7 @@ export default function App() {
             hear it in the conversation, and feel it during a visit.
           </p>
         </div>
-        <div className="editorial-aside">
+        <div className="editorial-aside reveal-right" data-reveal>
           <p>
             We want residents to feel comfortable, families to feel informed, and daily life to
             feel calm rather than rushed.
@@ -628,7 +674,7 @@ export default function App() {
         </div>
       </section>
 
-      <section className="content-section">
+      <section className="content-section reveal-up" data-reveal>
         <div className="section-heading">
           <div>
             <p className="eyebrow">Home life</p>
@@ -636,8 +682,13 @@ export default function App() {
           </div>
         </div>
         <div className="lifestyle-grid">
-          {livingFeatures.map((item) => (
-            <article key={item.title} className="lifestyle-card">
+          {livingFeatures.map((item, index) => (
+            <article
+              key={item.title}
+              className="lifestyle-card reveal-up"
+              data-reveal
+              style={{ "--reveal-delay": `${index * 100}ms` }}
+            >
               <h3>{item.title}</h3>
               <p>{item.description}</p>
             </article>
@@ -645,7 +696,7 @@ export default function App() {
         </div>
       </section>
 
-      <section className="content-section journey-section">
+      <section className="content-section journey-section reveal-up" data-reveal>
         <div className="section-heading">
           <div>
             <p className="eyebrow">Getting started</p>
@@ -653,8 +704,13 @@ export default function App() {
           </div>
         </div>
         <div className="journey-grid">
-          {experienceSteps.map((item) => (
-            <article key={item.step} className="journey-card">
+          {experienceSteps.map((item, index) => (
+            <article
+              key={item.step}
+              className="journey-card reveal-up"
+              data-reveal
+              style={{ "--reveal-delay": `${index * 110}ms` }}
+            >
               <span>{item.step}</span>
               <h3>{item.title}</h3>
               <p>{item.description}</p>
@@ -665,7 +721,7 @@ export default function App() {
 
       <GallerySection />
 
-      <section className="content-section faq-layout">
+      <section className="content-section faq-layout reveal-up" data-reveal>
         <div>
           <p className="eyebrow">Frequently asked</p>
           <h2>Questions families often ask early in the process.</h2>
@@ -674,8 +730,13 @@ export default function App() {
           </p>
         </div>
         <div className="faq-list">
-          {faqs.map((item) => (
-            <article key={item.question} className="faq-card">
+          {faqs.map((item, index) => (
+            <article
+              key={item.question}
+              className="faq-card reveal-up"
+              data-reveal
+              style={{ "--reveal-delay": `${index * 90}ms` }}
+            >
               <h3>{item.question}</h3>
               <p>{item.answer}</p>
             </article>
@@ -683,8 +744,8 @@ export default function App() {
         </div>
       </section>
 
-      <section className="content-section contact-layout" id="contact">
-        <div className="contact-copy">
+      <section className="content-section contact-layout reveal-up" data-reveal id="contact">
+        <div className="contact-copy reveal-left" data-reveal>
           <p className="eyebrow">Contact</p>
           <h2>Talk with us about your loved one and what kind of support they need.</h2>
           <p className="section-copy">
@@ -702,7 +763,7 @@ export default function App() {
             </p>
           </div>
         </div>
-        <div className="contact-card">
+        <div className="contact-card reveal-right" data-reveal>
           <ContactForm />
         </div>
       </section>

@@ -76,6 +76,17 @@ export const careHighlights = [
   }
 ];
 
+export const serviceHighlights = [
+  "Private Room Availability",
+  "24-Hour Residential Support",
+  "Medication Assistance",
+  "Spanish Family Communication",
+  "Mobility Help",
+  "Home-Cooked Meals",
+  "Calm Shared Spaces",
+  "Visit By Appointment"
+];
+
 export const livingFeatures = [
   {
     title: "Comfortable common areas",

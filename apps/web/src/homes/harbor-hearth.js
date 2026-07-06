@@ -76,6 +76,17 @@ export const careHighlights = [
   }
 ];
 
+export const serviceHighlights = [
+  "24-Hour Supervision",
+  "Medication Support",
+  "Personal Care Assistance",
+  "Private Room Options",
+  "Family Communication",
+  "Home-Cooked Meals",
+  "Mobility Support",
+  "Calm Daily Routine"
+];
+
 export const livingFeatures = [
   {
     title: "Comfortable shared spaces",
