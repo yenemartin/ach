@@ -18,6 +18,7 @@ export const homeProfile = {
   languages: ["English", "Amharic"],
   brandName: "Harbor Hearth",
   brandInitials: "HH",
+  brandPrimaryColor: "#2C64B7",
   neighborhoodNote: "A quiet residential setting near Shoreline and North Seattle",
   signatureNote:
     "A smaller home setting can feel gentler, more personal, and easier to trust. That is the kind of care environment Harbor Hearth aims to provide every day.",
@@ -32,17 +33,17 @@ export const homeProfile = {
 };
 
 export const defaultTheme = {
-  bg: "#f2ece3",
-  bgDeep: "#d6c4ae",
-  surface: "rgba(255, 251, 246, 0.86)",
-  surfaceStrong: "#fffdf9",
-  text: "#1c1915",
-  muted: "#655e55",
-  line: "rgba(69, 52, 34, 0.12)",
-  accent: "#8c4d2f",
-  accentStrong: "#68351f",
-  olive: "#51634b",
-  sand: "#c7a46a"
+  bg: "#eef4ff",
+  bgDeep: "#dbe8fb",
+  surface: "rgba(255, 255, 255, 0.86)",
+  surfaceStrong: "#fdfefe",
+  text: "#18212f",
+  muted: "#586579",
+  line: "rgba(44, 100, 183, 0.12)",
+  accent: "#2C64B7",
+  accentStrong: "#1f4e9e",
+  olive: "#5f7597",
+  sand: "#c7d7f1"
 };
 
 export const careHighlights = [

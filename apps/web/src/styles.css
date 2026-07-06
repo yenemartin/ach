@@ -30,10 +30,10 @@ body {
   min-height: 100vh;
   color: var(--text);
   background:
-    radial-gradient(circle at top left, rgba(140, 77, 47, 0.2), transparent 24rem),
-    radial-gradient(circle at top right, rgba(81, 99, 75, 0.12), transparent 22rem),
+    radial-gradient(circle at top left, color-mix(in srgb, var(--accent) 16%, transparent), transparent 24rem),
+    radial-gradient(circle at top right, color-mix(in srgb, var(--sand) 22%, transparent), transparent 22rem),
     linear-gradient(90deg, rgba(255, 255, 255, 0.18) 1px, transparent 1px),
-    linear-gradient(180deg, #f7f1e8 0%, var(--bg) 50%, #e4d8ca 100%);
+    linear-gradient(180deg, color-mix(in srgb, var(--bg) 60%, white) 0%, var(--bg) 48%, var(--bg-deep) 100%);
   background-size: auto, auto, 28px 28px, auto;
 }
 

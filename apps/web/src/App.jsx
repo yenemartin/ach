@@ -261,7 +261,9 @@ export default function App() {
       descriptionTag.setAttribute("content", homeProfile.seoDescription);
     }
 
-    if (homeProfile.logo) {
+    if (homeProfile.brandPrimaryColor) {
+      applyTheme(buildThemeFromAccent(homeProfile.brandPrimaryColor));
+    } else if (homeProfile.logo) {
       extractThemeFromImageUrl(homeProfile.logo)
         .then((theme) => applyTheme(theme))
         .catch(() => applyTheme(defaultTheme));
