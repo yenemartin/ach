@@ -34,7 +34,7 @@ export const homeProfile = {
 };
 
 export const contactForm = {
-  endpoint: "https://formspree.io/f/your-form-id",
+  endpoint: "/api/inquiries",
   successMessage:
     "Thank you for reaching out. Your message has been sent and we will follow up soon.",
   failureMessage:

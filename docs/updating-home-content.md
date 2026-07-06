@@ -29,13 +29,21 @@ Each home file also includes:
 - `contactForm.successMessage`
 - `contactForm.failureMessage`
 
-Replace the placeholder endpoint with the hosted form URL for that home.
+For the current Cloudflare setup, keep the endpoint as:
 
-Example:
+```js
+endpoint: "/api/inquiries"
+```
+
+The actual forwarding destination is configured in Cloudflare Pages with the environment variable:
+
+- `INQUIRY_WEBHOOK_URL`
+
+Example home config:
 
 ```js
 export const contactForm = {
-  endpoint: "https://formspree.io/f/abcde123",
+  endpoint: "/api/inquiries",
   successMessage: "Thank you for reaching out. We will follow up soon.",
   failureMessage: "We could not send your message right now. Please try again."
 };
@@ -79,8 +87,7 @@ secondaryImage: "/brand/sunrise-bedroom.jpg"
    - `apps/web/src/homes/sunrise-garden.js`
 3. Update all text, images, and contact info
 4. Set that home's `homeProfile.subdomain`
-5. Set that home's `contactForm.endpoint`
-6. Register it in `apps/web/src/homes/index.js`
+5. Register it in `apps/web/src/homes/index.js`
 
 Example:
 
@@ -126,3 +133,4 @@ After updating content:
 2. Push to `main`
 3. Cloudflare Pages redeploys automatically
 4. In Cloudflare Pages, attach the home's subdomain under `Custom domains`
+5. Make sure `INQUIRY_WEBHOOK_URL` is set in the Pages project environment

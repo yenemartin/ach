@@ -7,7 +7,7 @@ This project can be deployed without AWS.
 - Hosting: Cloudflare Pages
 - Domain: `afhcares.com`
 - Site type: static
-- Inquiry handling: phone, email, or hosted form service
+- Inquiry handling: Cloudflare Pages Function + webhook forwarding
 
 ## Cloudflare Pages Settings
 
@@ -26,13 +26,23 @@ After the first successful deployment:
 3. Optionally add `www.afhcares.com`.
 4. Update DNS or nameservers as Cloudflare instructs.
 
-## Lowest-Cost Inquiry Options
+## Contact Form Setup
 
-Use one of these for launch:
+The site now posts inquiries to the Cloudflare Pages Function at:
 
-- phone number + email only
-- hosted form endpoint such as Formspree
-- Tally
-- Google Form embed
+```text
+/api/inquiries
+```
 
-The current prototype is designed to post to a hosted form endpoint configured per home profile.
+In Cloudflare Pages, add this environment variable:
+
+- `INQUIRY_WEBHOOK_URL`
+
+That webhook can point to the destination you want to use for lead delivery, such as:
+
+- a private automation endpoint
+- a Google Apps Script webhook
+- a Make or Zapier webhook
+- another service you control
+
+If `INQUIRY_WEBHOOK_URL` is not configured, the form will return an error instead of silently pretending to work.
