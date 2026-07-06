@@ -6,8 +6,7 @@ import {
   faqs,
   galleryImages,
   homeProfile,
-  livingFeatures,
-  testimonials
+  livingFeatures
 } from "./mockData";
 
 function clamp(value, min, max) {
@@ -443,31 +442,6 @@ export default function App() {
                 <span>{image.caption}</span>
               </figcaption>
             </figure>
-          ))}
-        </div>
-      </section>
-
-      <section className="content-section testimonial-section">
-        <div className="section-heading">
-          <div>
-            <p className="eyebrow">What families notice</p>
-            <h2>Families often notice the feeling of a home before anything else.</h2>
-          </div>
-        </div>
-        <div className="pull-quote">
-          <p>
-            “A smaller home can feel more personal, more peaceful, and easier to trust.”
-          </p>
-        </div>
-        <div className="testimonial-grid">
-          {testimonials.map((item) => (
-            <blockquote key={item.name} className="testimonial-card">
-              <p>"{item.quote}"</p>
-              <footer>
-                <strong>{item.name}</strong>
-                <span>{item.role}</span>
-              </footer>
-            </blockquote>
           ))}
         </div>
       </section>

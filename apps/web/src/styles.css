@@ -414,7 +414,6 @@ h3 {
 
 .feature-grid,
 .lifestyle-grid,
-.testimonial-grid,
 .faq-list {
   display: grid;
   gap: 16px;
@@ -431,7 +430,6 @@ h3 {
 .feature-card,
 .lifestyle-card,
 .faq-card,
-.testimonial-card,
 .contact-card {
   border: 1px solid var(--line);
   border-radius: 24px;
@@ -440,8 +438,7 @@ h3 {
 
 .feature-card,
 .lifestyle-card,
-.faq-card,
-.testimonial-card {
+.faq-card {
   padding: 22px;
 }
 
@@ -499,37 +496,6 @@ h3 {
   display: grid;
   gap: 6px;
   padding: 18px;
-}
-
-.testimonial-grid {
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-}
-
-.testimonial-card {
-  margin: 0;
-}
-
-.pull-quote {
-  max-width: 48rem;
-  margin: 0 0 22px;
-}
-
-.pull-quote p {
-  margin-bottom: 0;
-  color: var(--accent-strong);
-  font-family: "Fraunces", serif;
-  font-size: clamp(1.45rem, 3vw, 2.2rem);
-  line-height: 1.28;
-}
-
-.testimonial-card p {
-  font-size: 1.05rem;
-  line-height: 1.8;
-}
-
-.testimonial-card footer {
-  display: grid;
-  gap: 4px;
 }
 
 .contact-copy {
@@ -622,7 +588,6 @@ h3 {
   .lifestyle-grid,
   .journey-grid,
   .gallery-grid,
-  .testimonial-grid,
   .hero-visual {
     grid-template-columns: 1fr;
   }

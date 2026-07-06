@@ -127,21 +127,6 @@ export const galleryImages = [
   }
 ];
 
-export const testimonials = [
-  {
-    name: "Martha L.",
-    role: "Daughter of Resident",
-    quote:
-      "From the first conversation, we felt at ease. The home felt peaceful, well cared for, and much more personal than the larger places we had visited."
-  },
-  {
-    name: "Daniel R.",
-    role: "Son of Resident",
-    quote:
-      "What stood out most was how calm everything felt. We could picture our loved one being safe, respected, and comfortable there."
-  }
-];
-
 export const faqs = [
   {
     question: "Can families schedule a tour before making any commitment?",
