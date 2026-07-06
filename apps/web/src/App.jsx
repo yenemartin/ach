@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import {
   careHighlights,
   defaultTheme,
@@ -103,75 +103,6 @@ function applyTheme(theme) {
   root.style.setProperty("--accent-strong", theme.accentStrong);
   root.style.setProperty("--olive", theme.olive);
   root.style.setProperty("--sand", theme.sand);
-}
-
-async function extractThemeFromLogo(file) {
-  const imageUrl = URL.createObjectURL(file);
-
-  try {
-    const image = await new Promise((resolve, reject) => {
-      const nextImage = new Image();
-      nextImage.onload = () => resolve(nextImage);
-      nextImage.onerror = () => reject(new Error("Unable to read logo image."));
-      nextImage.src = imageUrl;
-    });
-
-    const canvas = document.createElement("canvas");
-    const context = canvas.getContext("2d", { willReadFrequently: true });
-
-    if (!context) {
-      throw new Error("Canvas is not available in this browser.");
-    }
-
-    const maxSize = 80;
-    const ratio = Math.min(maxSize / image.width, maxSize / image.height, 1);
-    canvas.width = Math.max(1, Math.round(image.width * ratio));
-    canvas.height = Math.max(1, Math.round(image.height * ratio));
-    context.drawImage(image, 0, 0, canvas.width, canvas.height);
-
-    const { data } = context.getImageData(0, 0, canvas.width, canvas.height);
-    const swatches = new Map();
-
-    for (let index = 0; index < data.length; index += 4) {
-      const alpha = data[index + 3];
-
-      if (alpha < 180) {
-        continue;
-      }
-
-      const r = Math.round(data[index] / 24) * 24;
-      const g = Math.round(data[index + 1] / 24) * 24;
-      const b = Math.round(data[index + 2] / 24) * 24;
-      const hex = rgbToHex(r, g, b);
-
-      if (isNearWhite(hex) || isNearBlack(hex)) {
-        continue;
-      }
-
-      const scoreBoost = Math.abs(r - g) + Math.abs(g - b) + Math.abs(r - b);
-      swatches.set(hex, (swatches.get(hex) || 0) + 1 + scoreBoost / 200);
-    }
-
-    const dominant = [...swatches.entries()]
-      .sort((left, right) => right[1] - left[1])
-      .map(([hex]) => hex)[0];
-
-    if (!dominant) {
-      return {
-        logoUrl: imageUrl,
-        theme: defaultTheme
-      };
-    }
-
-    return {
-      logoUrl: imageUrl,
-      theme: buildThemeFromAccent(dominant)
-    };
-  } finally {
-    if (!imageUrl.startsWith("blob:")) {
-      URL.revokeObjectURL(imageUrl);
-    }
-  }
 }
 
 async function extractThemeFromImageUrl(imageUrl) {
@@ -321,76 +252,6 @@ function ContactForm() {
   );
 }
 
-function BrandStudio() {
-  const [logoUrl, setLogoUrl] = useState(homeProfile.logo || "");
-  const [themeNote, setThemeNote] = useState(
-    "Upload a logo and the page will pull a color theme from it."
-  );
-
-  const handleLogoChange = async (event) => {
-    const [file] = event.target.files || [];
-
-    if (!file) {
-      return;
-    }
-
-    try {
-      const result = await extractThemeFromLogo(file);
-      setLogoUrl((current) => {
-        if (current.startsWith("blob:")) {
-          URL.revokeObjectURL(current);
-        }
-
-        return result.logoUrl;
-      });
-      applyTheme(result.theme);
-      setThemeNote(`Theme updated from ${file.name}.`);
-    } catch (error) {
-      setThemeNote(error instanceof Error ? error.message : "Could not detect colors from logo.");
-    }
-  };
-
-  const handleReset = () => {
-    if (logoUrl.startsWith("blob:")) {
-      URL.revokeObjectURL(logoUrl);
-    }
-
-    setLogoUrl(homeProfile.logo || "");
-    applyTheme(defaultTheme);
-    setThemeNote("Theme reset to the default palette.");
-  };
-
-  return (
-    <section className="content-section brand-studio">
-      <div>
-        <p className="eyebrow">Brand studio</p>
-        <h2>Make the page inherit its look from the home’s logo.</h2>
-        <p className="section-copy">
-          This lets us quickly tune the site for each client without manually rewriting all the
-          colors. Use it with the final logo before the meeting.
-        </p>
-      </div>
-      <div className="brand-controls">
-        <div className="logo-badge">
-          {logoUrl ? (
-            <img alt={`${homeProfile.brandName} logo preview`} src={logoUrl} />
-          ) : (
-            <span>{homeProfile.brandInitials}</span>
-          )}
-        </div>
-        <label className="upload-button">
-          <input accept="image/*" onChange={handleLogoChange} type="file" />
-          Upload logo
-        </label>
-        <button className="button button-secondary" onClick={handleReset} type="button">
-          Reset colors
-        </button>
-        <p className="brand-note">{themeNote}</p>
-      </div>
-    </section>
-  );
-}
-
 export default function App() {
   useEffect(() => {
     document.title = homeProfile.seoTitle;
@@ -492,8 +353,6 @@ export default function App() {
           <span>Family communication support</span>
         </div>
       </section>
-
-      <BrandStudio />
 
       <section className="content-section two-column" id="story">
         <div>
