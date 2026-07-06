@@ -194,7 +194,6 @@ h3 {
 .feature-card p,
 .lifestyle-card p,
 .faq-card p,
-.testimonial-card p,
 .contact-form label,
 .form-feedback {
   color: var(--muted);
@@ -476,26 +475,246 @@ h3 {
 
 .gallery-grid {
   display: grid;
-  grid-template-columns: 1.1fr 0.9fr 0.9fr;
-  gap: 16px;
 }
 
-.gallery-card {
+.gallery-experience {
+  display: grid;
+  grid-template-columns: minmax(0, 1.35fr) minmax(280px, 0.75fr);
+  gap: 18px;
+  align-items: stretch;
+}
+
+.gallery-stage,
+.gallery-thumb {
+  padding: 0;
+  border: 0;
+  color: inherit;
+  text-align: left;
+  cursor: pointer;
+  font: inherit;
+}
+
+.gallery-stage {
+  position: relative;
   overflow: hidden;
-  border-radius: 26px;
+  border-radius: 28px;
   border: 1px solid var(--line);
   background: var(--surface-strong);
+  min-height: 520px;
 }
 
-.gallery-card img {
-  height: 260px;
+.gallery-stage img {
+  height: 100%;
+  min-height: 520px;
+  object-fit: cover;
+  transition: transform 260ms ease;
+}
+
+.gallery-stage:hover img {
+  transform: scale(1.02);
+}
+
+.gallery-stage-overlay {
+  position: absolute;
+  inset: auto 0 0 0;
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+  gap: 18px;
+  padding: 22px;
+  background: linear-gradient(180deg, transparent, rgba(9, 18, 33, 0.78));
+  color: #f4f8ff;
+}
+
+.gallery-stage-overlay p,
+.gallery-stage-overlay strong,
+.gallery-stage-overlay span {
+  color: inherit;
+}
+
+.gallery-stage-overlay p {
+  margin-bottom: 8px;
+  font-size: 0.82rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.gallery-stage-overlay strong {
+  display: block;
+  max-width: 32rem;
+  font-family: "Fraunces", serif;
+  font-size: 1.5rem;
+  line-height: 1.25;
+}
+
+.gallery-stage-overlay span {
+  white-space: nowrap;
+  font-size: 0.95rem;
+}
+
+.gallery-sidebar {
+  display: grid;
+  gap: 14px;
+}
+
+.gallery-sidebar-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.gallery-sidebar-label {
+  margin-bottom: 0;
+  color: var(--accent);
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.gallery-controls {
+  display: flex;
+  gap: 8px;
+}
+
+.gallery-arrow,
+.lightbox-nav,
+.lightbox-close {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--line);
+  background: rgba(255, 255, 255, 0.86);
+  color: var(--text);
+  cursor: pointer;
+  font: inherit;
+}
+
+.gallery-arrow {
+  width: 40px;
+  height: 40px;
+  border-radius: 999px;
+  font-size: 1.4rem;
+}
+
+.gallery-thumbs {
+  display: grid;
+  gap: 12px;
+}
+
+.gallery-thumb {
+  display: grid;
+  grid-template-columns: 106px minmax(0, 1fr);
+  gap: 12px;
+  padding: 10px;
+  border-radius: 22px;
+  border: 1px solid transparent;
+  background: rgba(255, 255, 255, 0.5);
+  transition: border-color 180ms ease, transform 180ms ease, background 180ms ease;
+}
+
+.gallery-thumb:hover {
+  transform: translateY(-1px);
+}
+
+.gallery-thumb-active {
+  border-color: color-mix(in srgb, var(--accent) 36%, white);
+  background: rgba(255, 255, 255, 0.88);
+  box-shadow: var(--shadow);
+}
+
+.gallery-thumb img {
+  height: 88px;
+  border-radius: 14px;
   object-fit: cover;
 }
 
-.gallery-card figcaption {
+.gallery-thumb-copy {
   display: grid;
+  align-content: center;
   gap: 6px;
-  padding: 18px;
+}
+
+.gallery-thumb-copy strong {
+  font-family: "Fraunces", serif;
+  font-size: 1.05rem;
+  line-height: 1.2;
+}
+
+.gallery-thumb-copy span {
+  color: var(--muted);
+  font-size: 0.92rem;
+  line-height: 1.45;
+}
+
+.lightbox-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 30;
+  display: grid;
+  place-items: center;
+  padding: 24px;
+  background: rgba(10, 16, 28, 0.84);
+  backdrop-filter: blur(8px);
+}
+
+.lightbox-shell {
+  position: relative;
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 18px;
+  width: min(1200px, 100%);
+}
+
+.lightbox-close {
+  position: absolute;
+  top: -8px;
+  right: -8px;
+  width: 44px;
+  height: 44px;
+  border-radius: 999px;
+  font-size: 1.7rem;
+}
+
+.lightbox-nav {
+  width: 52px;
+  height: 52px;
+  border-radius: 999px;
+  font-size: 2rem;
+}
+
+.lightbox-figure {
+  margin: 0;
+  overflow: hidden;
+  border-radius: 30px;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  background: rgba(18, 27, 43, 0.92);
+}
+
+.lightbox-figure img {
+  max-height: 72vh;
+  object-fit: contain;
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.lightbox-figure figcaption {
+  padding: 18px 22px 22px;
+  color: #edf4ff;
+}
+
+.lightbox-figure strong {
+  display: block;
+  margin-bottom: 6px;
+  font-family: "Fraunces", serif;
+  font-size: 1.2rem;
+}
+
+.lightbox-figure p {
+  margin-bottom: 0;
+  color: #cbd8ea;
+  line-height: 1.6;
 }
 
 .contact-copy {
@@ -587,7 +806,7 @@ h3 {
   .feature-grid,
   .lifestyle-grid,
   .journey-grid,
-  .gallery-grid,
+  .gallery-experience,
   .hero-visual {
     grid-template-columns: 1fr;
   }
@@ -597,9 +816,36 @@ h3 {
   }
 
   .hero-card-main img,
-  .gallery-card img {
+  .gallery-stage img {
     min-height: 0;
     height: 280px;
+  }
+
+  .gallery-stage {
+    min-height: 0;
+  }
+
+  .gallery-thumb {
+    grid-template-columns: 88px minmax(0, 1fr);
+  }
+
+  .lightbox-shell {
+    grid-template-columns: 1fr;
+    justify-items: center;
+  }
+
+  .lightbox-nav {
+    position: absolute;
+    top: calc(50% - 26px);
+    z-index: 1;
+  }
+
+  .lightbox-nav-left {
+    left: 12px;
+  }
+
+  .lightbox-nav-right {
+    right: 12px;
   }
 }
 
@@ -615,8 +861,6 @@ h3 {
   .feature-card,
   .lifestyle-card,
   .faq-card,
-  .testimonial-card,
-  .gallery-card,
   .hero-card {
     border-radius: 22px;
   }
@@ -633,6 +877,18 @@ h3 {
 
   .contact-form {
     grid-template-columns: 1fr;
+  }
+
+  .gallery-stage-overlay {
+    grid-template-columns: 1fr;
+  }
+
+  .gallery-thumb {
+    grid-template-columns: 1fr;
+  }
+
+  .gallery-thumb img {
+    height: 140px;
   }
 
   h1 {

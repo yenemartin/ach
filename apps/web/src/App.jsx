@@ -308,6 +308,187 @@ function ContactForm() {
   );
 }
 
+function GallerySection() {
+  const [activeIndex, setActiveIndex] = useState(0);
+  const [lightboxIndex, setLightboxIndex] = useState(null);
+  const activeImage = galleryImages[activeIndex];
+  const lightboxImage = lightboxIndex === null ? null : galleryImages[lightboxIndex];
+
+  useEffect(() => {
+    if (galleryImages.length <= 1 || lightboxIndex !== null) {
+      return undefined;
+    }
+
+    const intervalId = window.setInterval(() => {
+      setActiveIndex((current) => (current + 1) % galleryImages.length);
+    }, 4200);
+
+    return () => window.clearInterval(intervalId);
+  }, [lightboxIndex]);
+
+  useEffect(() => {
+    if (lightboxIndex === null) {
+      return undefined;
+    }
+
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+
+    const handleKeyDown = (event) => {
+      if (event.key === "Escape") {
+        setLightboxIndex(null);
+      }
+
+      if (event.key === "ArrowRight") {
+        setLightboxIndex((current) => ((current ?? 0) + 1) % galleryImages.length);
+      }
+
+      if (event.key === "ArrowLeft") {
+        setLightboxIndex((current) => ((current ?? 0) - 1 + galleryImages.length) % galleryImages.length);
+      }
+    };
+
+    window.addEventListener("keydown", handleKeyDown);
+
+    return () => {
+      document.body.style.overflow = previousOverflow;
+      window.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [lightboxIndex]);
+
+  const openLightbox = (index) => {
+    setActiveIndex(index);
+    setLightboxIndex(index);
+  };
+
+  const goToSlide = (index) => {
+    setActiveIndex(index);
+  };
+
+  const goToNext = () => {
+    setActiveIndex((current) => (current + 1) % galleryImages.length);
+  };
+
+  const goToPrevious = () => {
+    setActiveIndex((current) => (current - 1 + galleryImages.length) % galleryImages.length);
+  };
+
+  const goToNextLightbox = () => {
+    setLightboxIndex((current) => ((current ?? 0) + 1) % galleryImages.length);
+  };
+
+  const goToPreviousLightbox = () => {
+    setLightboxIndex((current) => ((current ?? 0) - 1 + galleryImages.length) % galleryImages.length);
+  };
+
+  return (
+    <>
+      <section className="content-section gallery-section" id="gallery">
+        <div className="section-heading">
+          <div>
+            <p className="eyebrow">Gallery</p>
+            <h2>Take a look at the rooms and shared spaces that shape daily life.</h2>
+          </div>
+          <p className="section-note">Families often want to understand the feel of the home before they visit.</p>
+        </div>
+
+        <div className="gallery-experience">
+          <button
+            aria-label="Open gallery image"
+            className="gallery-stage"
+            onClick={() => openLightbox(activeIndex)}
+            type="button"
+          >
+            <img alt={activeImage.alt} src={activeImage.src} />
+            <div className="gallery-stage-overlay">
+              <div>
+                <p>{activeImage.title}</p>
+                <strong>{activeImage.caption}</strong>
+              </div>
+              <span>Open fullscreen</span>
+            </div>
+          </button>
+
+          <div className="gallery-sidebar">
+            <div className="gallery-sidebar-top">
+              <p className="gallery-sidebar-label">Photo tour</p>
+              <div className="gallery-controls">
+                <button aria-label="Previous image" className="gallery-arrow" onClick={goToPrevious} type="button">
+                  ‹
+                </button>
+                <button aria-label="Next image" className="gallery-arrow" onClick={goToNext} type="button">
+                  ›
+                </button>
+              </div>
+            </div>
+
+            <div className="gallery-thumbs" role="tablist" aria-label="Gallery image list">
+              {galleryImages.map((image, index) => (
+                <button
+                  key={image.title}
+                  aria-selected={index === activeIndex}
+                  className={`gallery-thumb ${index === activeIndex ? "gallery-thumb-active" : ""}`}
+                  onClick={() => goToSlide(index)}
+                  type="button"
+                >
+                  <img alt={image.alt} src={image.src} />
+                  <div className="gallery-thumb-copy">
+                    <strong>{image.title}</strong>
+                    {image.caption ? <span>{image.caption}</span> : null}
+                  </div>
+                </button>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {lightboxImage ? (
+        <div
+          aria-label="Image viewer"
+          className="lightbox-backdrop"
+          onClick={() => setLightboxIndex(null)}
+          role="dialog"
+        >
+          <div className="lightbox-shell" onClick={(event) => event.stopPropagation()} role="document">
+            <button
+              aria-label="Close image viewer"
+              className="lightbox-close"
+              onClick={() => setLightboxIndex(null)}
+              type="button"
+            >
+              ×
+            </button>
+            <button
+              aria-label="Previous image"
+              className="lightbox-nav lightbox-nav-left"
+              onClick={goToPreviousLightbox}
+              type="button"
+            >
+              ‹
+            </button>
+            <figure className="lightbox-figure">
+              <img alt={lightboxImage.alt} src={lightboxImage.src} />
+              <figcaption>
+                <strong>{lightboxImage.title}</strong>
+                {lightboxImage.caption ? <p>{lightboxImage.caption}</p> : null}
+              </figcaption>
+            </figure>
+            <button
+              aria-label="Next image"
+              className="lightbox-nav lightbox-nav-right"
+              onClick={goToNextLightbox}
+              type="button"
+            >
+              ›
+            </button>
+          </div>
+        </div>
+      ) : null}
+    </>
+  );
+}
+
 export default function App() {
   useEffect(() => {
     document.title = homeProfile.seoTitle;
@@ -482,26 +663,7 @@ export default function App() {
         </div>
       </section>
 
-      <section className="content-section gallery-section" id="gallery">
-        <div className="section-heading">
-          <div>
-            <p className="eyebrow">Gallery</p>
-            <h2>Take a look at the rooms and shared spaces that shape daily life.</h2>
-          </div>
-          <p className="section-note">Families often want to understand the feel of the home before they visit.</p>
-        </div>
-        <div className="gallery-grid">
-          {galleryImages.map((image) => (
-            <figure key={image.title} className="gallery-card">
-              <img alt={image.alt} src={image.src} />
-              <figcaption>
-                <strong>{image.title}</strong>
-                <span>{image.caption}</span>
-              </figcaption>
-            </figure>
-          ))}
-        </div>
-      </section>
+      <GallerySection />
 
       <section className="content-section faq-layout">
         <div>
