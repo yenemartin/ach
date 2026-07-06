@@ -31,9 +31,8 @@ After the first successful deployment:
 Use one of these for launch:
 
 - phone number + email only
-- `mailto:` contact form
-- Formspree
+- hosted form endpoint such as Formspree
 - Tally
 - Google Form embed
 
-The current prototype uses a `mailto:` form flow so it can work without a backend.
+The current prototype is designed to post to a hosted form endpoint configured per home profile.

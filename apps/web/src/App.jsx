@@ -4,6 +4,7 @@ import { getSelectedHome } from "./homes";
 const selectedHome = getSelectedHome();
 const {
   careHighlights,
+  contactForm,
   defaultTheme,
   experienceSteps,
   faqs,
@@ -166,31 +167,83 @@ function ContactForm() {
     timeline: "",
     message: ""
   });
-  const [feedback, setFeedback] = useState("");
+  const [submitState, setSubmitState] = useState({
+    pending: false,
+    success: "",
+    error: ""
+  });
 
   const handleChange = (event) => {
     const { name, value } = event.target;
     setFormState((current) => ({ ...current, [name]: value }));
   };
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
 
-    const subject = encodeURIComponent(`Tour request for ${homeProfile.name}`);
-    const body = encodeURIComponent(
-      [
-        `Name: ${formState.name}`,
-        `Phone: ${formState.phone}`,
-        `Email: ${formState.email}`,
-        `Preferred timeline: ${formState.timeline}`,
-        "",
-        "Message:",
-        formState.message
-      ].join("\n")
-    );
+    const endpoint = contactForm.endpoint?.trim();
 
-    window.location.href = `mailto:${homeProfile.email}?subject=${subject}&body=${body}`;
-    setFeedback("Your email app should open with the tour request pre-filled.");
+    if (!endpoint || endpoint.includes("your-form-id")) {
+      setSubmitState({
+        pending: false,
+        success: "",
+        error:
+          "The inquiry form is not fully configured yet. Please add a hosted form endpoint for this home."
+      });
+      return;
+    }
+
+    setSubmitState({
+      pending: true,
+      success: "",
+      error: ""
+    });
+
+    const payload = {
+      homeKey: selectedHome.key,
+      homeName: homeProfile.name,
+      homeSubdomain: selectedHome.subdomain,
+      inquiryType: "tour_request",
+      name: formState.name,
+      phone: formState.phone,
+      email: formState.email,
+      moveInTimeline: formState.timeline,
+      message: formState.message
+    };
+
+    try {
+      const response = await fetch(endpoint, {
+        method: "POST",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(payload)
+      });
+
+      if (!response.ok) {
+        throw new Error("Request failed.");
+      }
+
+      setFormState({
+        name: "",
+        phone: "",
+        email: "",
+        timeline: "",
+        message: ""
+      });
+      setSubmitState({
+        pending: false,
+        success: contactForm.successMessage,
+        error: ""
+      });
+    } catch {
+      setSubmitState({
+        pending: false,
+        success: "",
+        error: contactForm.failureMessage
+      });
+    }
   };
 
   return (
@@ -246,10 +299,11 @@ function ContactForm() {
           value={formState.message}
         />
       </label>
-      <button className="button button-primary" type="submit">
-        Request a tour
+      <button className="button button-primary" disabled={submitState.pending} type="submit">
+        {submitState.pending ? "Sending..." : "Request a tour"}
       </button>
-      {feedback ? <p className="form-feedback">{feedback}</p> : null}
+      {submitState.success ? <p className="form-feedback success-text">{submitState.success}</p> : null}
+      {submitState.error ? <p className="form-feedback error-text">{submitState.error}</p> : null}
     </form>
   );
 }
@@ -360,7 +414,7 @@ export default function App() {
 
       <section className="content-section two-column" id="story">
         <div>
-          <p className="eyebrow">About Harbor Hearth</p>
+          <p className="eyebrow">About {homeProfile.brandName}</p>
           <h2>A smaller home setting with a more personal pace of care.</h2>
           <p className="section-copy">{homeProfile.story}</p>
         </div>
@@ -380,7 +434,7 @@ export default function App() {
           <p className="eyebrow">Our approach</p>
           <h2>We believe care should feel respectful, steady, and home-like.</h2>
           <p className="section-copy">
-            Harbor Hearth is built around the idea that a home can offer both dependable support
+            {homeProfile.brandName} is built around the idea that a home can offer both dependable support
             and a genuine sense of warmth. Families should be able to see that in the environment,
             hear it in the conversation, and feel it during a visit.
           </p>

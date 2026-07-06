@@ -10,6 +10,7 @@ export const homeProfile = {
   story:
     "Choosing care for a loved one can feel overwhelming. Harbor Hearth is built around a quieter, more personal experience where families can ask questions, understand the home’s approach, and feel confident about the next step.",
   city: "Shoreline, WA",
+  subdomain: "harbor-hearth.afhcares.com",
   availability: "Now scheduling tours",
   phone: "(206) 555-0186",
   phoneHref: "12065550186",
@@ -30,6 +31,14 @@ export const homeProfile = {
   heroImage: "/brand/hero-home.svg",
   secondaryImage: "/brand/bedroom.svg",
   logo: "/brand/harbor-hearth-logo.svg"
+};
+
+export const contactForm = {
+  endpoint: "https://formspree.io/f/your-form-id",
+  successMessage:
+    "Thank you for reaching out. Your message has been sent and we will follow up soon.",
+  failureMessage:
+    "We were not able to send your message right now. Please try again or call us directly."
 };
 
 export const defaultTheme = {
