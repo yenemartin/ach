@@ -8,6 +8,7 @@ import {
   homeProfile,
   livingFeatures
 } from "./harbor-hearth";
+import * as cedarGrove from "./cedar-grove";
 
 export const homes = {
   "harbor-hearth": {
@@ -22,6 +23,12 @@ export const homes = {
     experienceSteps,
     galleryImages,
     faqs
+  },
+  "cedar-grove": {
+    key: "cedar-grove",
+    subdomain: "cedar-grove.afhcares.com",
+    aliases: [],
+    ...cedarGrove
   }
 };
 

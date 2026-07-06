@@ -26,6 +26,11 @@ After the first successful deployment:
 3. Optionally add `www.afhcares.com`.
 4. Update DNS or nameservers as Cloudflare instructs.
 
+For individual home sites, add each home's subdomain separately in the same Pages project. Current sample homes:
+
+- `harbor-hearth.afhcares.com`
+- `cedar-grove.afhcares.com`
+
 ## Contact Form Setup
 
 The site now posts inquiries to the Cloudflare Pages Function at:

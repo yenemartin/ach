@@ -1,0 +1,14 @@
+<svg width="640" height="220" viewBox="0 0 640 220" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="640" height="220" rx="28" fill="#F8FBF7"/>
+  <g transform="translate(40 26)">
+    <rect x="34" y="34" width="128" height="128" rx="28" fill="#EEF3E5"/>
+    <path d="M97 38L147 86H132V152H62V86H47L97 38Z" fill="#5A7A47"/>
+    <path d="M83 152V105C83 95.6112 90.6112 88 100 88H103C112.389 88 120 95.6112 120 105V152H83Z" fill="#F7F5EE"/>
+    <circle cx="142" cy="58" r="20" fill="#C9983E"/>
+    <path d="M157 135C176 113 200 96 231 93C216 112 207 132 201 150H157V135Z" fill="#4A6740"/>
+  </g>
+  <text x="228" y="98" fill="#4F6D3D" font-family="Georgia, serif" font-size="52">Cedar Grove</text>
+  <text x="231" y="140" fill="#B7862F" font-family="Arial, sans-serif" font-size="20" letter-spacing="7">ADULT FAMILY HOME</text>
+  <path d="M231 160H580" stroke="#D7C7A2" stroke-width="2"/>
+  <text x="231" y="188" fill="#677068" font-family="Arial, sans-serif" font-size="15">Warm, steady support in a quiet residential home</text>
+</svg>

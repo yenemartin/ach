@@ -5,6 +5,7 @@ Each website can now read from a dedicated home profile file.
 ## Current Structure
 
 - Active home profile: `apps/web/src/homes/harbor-hearth.js`
+- Second sample home: `apps/web/src/homes/cedar-grove.js`
 - Home selector: `apps/web/src/homes/index.js`
 - Images and logo: `apps/web/public/brand/`
 - Subdomain mapping: `apps/web/src/homes/index.js`
@@ -102,26 +103,37 @@ export const homes = {
     aliases: [],
     ...harborHearth
   },
-  "sunrise-garden": {
-    key: "sunrise-garden",
-    subdomain: "sunrise-garden.afhcares.com",
+  "cedar-grove": {
+    key: "cedar-grove",
+    subdomain: "cedar-grove.afhcares.com",
     aliases: [],
-    ...sunriseGarden
+    ...cedarGrove
   }
 };
 ```
+
+## Current Sample Homes
+
+The repo now includes two working sample homes:
+
+- `harbor-hearth`
+  - subdomain: `harbor-hearth.afhcares.com`
+  - profile file: `apps/web/src/homes/harbor-hearth.js`
+- `cedar-grove`
+  - subdomain: `cedar-grove.afhcares.com`
+  - profile file: `apps/web/src/homes/cedar-grove.js`
 
 ## Preview A Specific Home
 
 Production routing is hostname-based. The site loads the matching home when the hostname matches a registered subdomain such as:
 
 - `https://harbor-hearth.afhcares.com`
-- `https://sunrise-garden.afhcares.com`
+- `https://cedar-grove.afhcares.com`
 
 For local development and `pages.dev` previews, the site can still load a specific home from the query string:
 
 - `http://localhost:4173/?home=harbor-hearth`
-- `http://localhost:4173/?home=sunrise-garden`
+- `http://localhost:4173/?home=cedar-grove`
 
 If no `home` value is provided, it defaults to `harbor-hearth`.
 
@@ -134,3 +146,15 @@ After updating content:
 3. Cloudflare Pages redeploys automatically
 4. In Cloudflare Pages, attach the home's subdomain under `Custom domains`
 5. Make sure `INQUIRY_WEBHOOK_URL` is set in the Pages project environment
+
+## Cloudflare Checklist
+
+For each home you want live:
+
+1. Open the Cloudflare Pages project
+2. Go to `Custom domains`
+3. Add the home's subdomain, for example:
+   - `harbor-hearth.afhcares.com`
+   - `cedar-grove.afhcares.com`
+4. In project settings, set `INQUIRY_WEBHOOK_URL`
+5. Test the form from the live subdomain

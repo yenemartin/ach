@@ -1,0 +1,23 @@
+<svg width="1600" height="1100" viewBox="0 0 1600 1100" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1600" height="1100" fill="#F4F6EF"/>
+  <rect y="760" width="1600" height="340" fill="#D7D2C2"/>
+  <rect x="0" y="0" width="1600" height="640" fill="url(#sky)"/>
+  <circle cx="1240" cy="178" r="84" fill="#E5CC91"/>
+  <rect x="238" y="372" width="1118" height="420" rx="24" fill="#C8C0AF"/>
+  <rect x="286" y="425" width="1020" height="320" rx="20" fill="#EEE9DD"/>
+  <path d="M188 438L795 130L1412 438H1264L795 171L336 438H188Z" fill="#6A7C53"/>
+  <rect x="404" y="468" width="218" height="226" rx="18" fill="#FBFAF5"/>
+  <rect x="691" y="468" width="210" height="274" rx="18" fill="#8E6A45"/>
+  <rect x="968" y="468" width="220" height="226" rx="18" fill="#FBFAF5"/>
+  <rect x="476" y="511" width="84" height="140" rx="8" fill="#D3B28E"/>
+  <rect x="1038" y="511" width="84" height="140" rx="8" fill="#D3B28E"/>
+  <rect x="747" y="536" width="98" height="206" rx="49" fill="#F7F2E8"/>
+  <path d="M0 792C176 734 358 727 544 748C774 774 936 825 1140 802C1310 783 1445 728 1600 700V1100H0V792Z" fill="#8AA16A"/>
+  <path d="M0 854C182 818 326 813 521 833C760 857 942 916 1176 892C1324 877 1444 838 1600 796V1100H0V854Z" fill="#6B8453"/>
+  <defs>
+    <linearGradient id="sky" x1="800" y1="0" x2="800" y2="640" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#F7F8F3"/>
+      <stop offset="1" stop-color="#E2E6D9"/>
+    </linearGradient>
+  </defs>
+</svg>
