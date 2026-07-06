@@ -271,7 +271,7 @@ function ContactForm() {
 }
 
 function BrandStudio() {
-  const [logoUrl, setLogoUrl] = useState("");
+  const [logoUrl, setLogoUrl] = useState(homeProfile.logo || "");
   const [themeNote, setThemeNote] = useState(
     "Upload a logo and the page will pull a color theme from it."
   );
@@ -304,7 +304,7 @@ function BrandStudio() {
       URL.revokeObjectURL(logoUrl);
     }
 
-    setLogoUrl("");
+    setLogoUrl(homeProfile.logo || "");
     applyTheme(defaultTheme);
     setThemeNote("Theme reset to the default palette.");
   };
@@ -356,7 +356,11 @@ export default function App() {
     <main className="site-shell">
       <header className="topbar">
         <div className="brand-lockup">
-          <div className="brand-monogram">{homeProfile.brandInitials}</div>
+          {homeProfile.logo ? (
+            <img className="brand-logo" alt={`${homeProfile.brandName} logo`} src={homeProfile.logo} />
+          ) : (
+            <div className="brand-monogram">{homeProfile.brandInitials}</div>
+          )}
           <div>
             <strong>{homeProfile.brandName}</strong>
             <p>{homeProfile.neighborhoodNote}</p>
