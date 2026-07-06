@@ -11,6 +11,10 @@ function unauthorized(message = "Unauthorized.") {
   return json({ error: message }, { status: 401 });
 }
 
+function serviceUnavailable(message = "Service unavailable.") {
+  return json({ error: message }, { status: 503 });
+}
+
 function trimString(value) {
   return typeof value === "string" ? value.trim() : "";
 }
@@ -90,6 +94,10 @@ function getTokenFromRequest(request) {
 }
 
 async function storeInquiry(env, inquiry) {
+  if (!env.INQUIRIES || typeof env.INQUIRIES.put !== "function") {
+    throw new Error("KV binding INQUIRIES is missing or invalid.");
+  }
+
   const submitted = Date.parse(inquiry.submittedAt) || Date.now();
   const key = `inquiry:${String(submitted).padStart(13, "0")}:${inquiry.id}`;
   await env.INQUIRIES.put(key, JSON.stringify(inquiry));
@@ -97,6 +105,10 @@ async function storeInquiry(env, inquiry) {
 }
 
 async function listInquiries(env, limit) {
+  if (!env.INQUIRIES || typeof env.INQUIRIES.list !== "function" || typeof env.INQUIRIES.get !== "function") {
+    throw new Error("KV binding INQUIRIES is missing or invalid.");
+  }
+
   const page = await env.INQUIRIES.list({ prefix: "inquiry:", limit });
   const keys = [...page.keys].sort((left, right) => right.name.localeCompare(left.name));
   const items = await Promise.all(
@@ -116,92 +128,113 @@ function getRoute(request) {
 
 export default {
   async fetch(request, env) {
-    const route = getRoute(request);
-
-    if (route === "GET /health") {
-      return json({
-        ok: true,
-        service: "afhcares-inquiry-worker"
-      });
-    }
-
-    if (route === "POST /capture") {
-      const inboundToken = trimString(env.INBOUND_TOKEN);
-      const requestToken = getTokenFromRequest(request);
-
-      if (inboundToken && requestToken !== inboundToken) {
-        return unauthorized("Capture token is invalid.");
-      }
-
-      let body;
-
       try {
-        body = await request.json();
-      } catch {
-        return json({ error: "Invalid JSON body." }, { status: 400 });
-      }
+        const route = getRoute(request);
 
-      const validated = validateInquiry(body);
-
-      if (validated.error) {
-        return json({ error: validated.error }, { status: 400 });
-      }
-
-      const inquiry = validated.value;
-      const storageKey = await storeInquiry(env, inquiry);
-
-      return json({
-        ok: true,
-        inquiry: {
-          id: inquiry.id,
-          homeKey: inquiry.homeKey,
-          submittedAt: inquiry.submittedAt
-        },
-        storageKey
-      });
-    }
-
-    if (route === "GET /inquiries") {
-      const adminToken = trimString(env.ADMIN_TOKEN);
-      const requestToken = getTokenFromRequest(request);
-
-      if (!adminToken || requestToken !== adminToken) {
-        return unauthorized("Admin token is invalid.");
-      }
-
-      const url = new URL(request.url);
-      const limit = Math.min(Number.parseInt(url.searchParams.get("limit") || "25", 10) || 25, 100);
-      const inquiries = await listInquiries(env, limit);
-
-      return json({
-        ok: true,
-        count: inquiries.length,
-        inquiries
-      });
-    }
-
-    if (route === "GET /setup") {
-      return json({
-        ok: true,
-        captureUrlExample: "https://your-worker.your-subdomain.workers.dev/capture?token=replace-me",
-        adminUrlExample: "https://your-worker.your-subdomain.workers.dev/inquiries?token=replace-me",
-        kvBinding: "INQUIRIES",
-        requiredSecrets: ["INBOUND_TOKEN", "ADMIN_TOKEN"],
-        configured: {
-          hasInboundToken: Boolean(trimString(env.INBOUND_TOKEN)),
-          hasAdminToken: Boolean(trimString(env.ADMIN_TOKEN)),
-          inboundTokenPreview: maskToken(trimString(env.INBOUND_TOKEN)),
-          adminTokenPreview: maskToken(trimString(env.ADMIN_TOKEN))
+        if (route === "GET /health") {
+          return json({
+            ok: true,
+            service: "afhcares-inquiry-worker"
+          });
         }
-      });
-    }
 
-    return json(
-      {
-        error: "Not found.",
-        routes: ["GET /health", "GET /setup", "POST /capture", "GET /inquiries"]
-      },
-      { status: 404 }
-    );
+        if (route === "POST /capture") {
+          const inboundToken = trimString(env.INBOUND_TOKEN);
+          const requestToken = getTokenFromRequest(request);
+
+          if (inboundToken && requestToken !== inboundToken) {
+            return unauthorized("Capture token is invalid.");
+          }
+
+          let body;
+
+          try {
+            body = await request.json();
+          } catch {
+            return json({ error: "Invalid JSON body." }, { status: 400 });
+          }
+
+          const validated = validateInquiry(body);
+
+          if (validated.error) {
+            return json({ error: validated.error }, { status: 400 });
+          }
+
+          const inquiry = validated.value;
+          const storageKey = await storeInquiry(env, inquiry);
+
+          return json({
+            ok: true,
+            inquiry: {
+              id: inquiry.id,
+              homeKey: inquiry.homeKey,
+              submittedAt: inquiry.submittedAt
+            },
+            storageKey
+          });
+        }
+
+        if (route === "GET /inquiries") {
+          const adminToken = trimString(env.ADMIN_TOKEN);
+          const requestToken = getTokenFromRequest(request);
+
+          if (!adminToken || requestToken !== adminToken) {
+            return unauthorized("Admin token is invalid.");
+          }
+
+          const url = new URL(request.url);
+          const limit = Math.min(Number.parseInt(url.searchParams.get("limit") || "25", 10) || 25, 100);
+          const inquiries = await listInquiries(env, limit);
+
+          return json({
+            ok: true,
+            count: inquiries.length,
+            inquiries
+          });
+        }
+
+        if (route === "GET /setup") {
+          return json({
+            ok: true,
+            captureUrlExample: "https://your-worker.your-subdomain.workers.dev/capture?token=replace-me",
+            adminUrlExample: "https://your-worker.your-subdomain.workers.dev/inquiries?token=replace-me",
+            kvBinding: "INQUIRIES",
+            requiredSecrets: ["INBOUND_TOKEN", "ADMIN_TOKEN"],
+            configured: {
+              hasInboundToken: Boolean(trimString(env.INBOUND_TOKEN)),
+              hasAdminToken: Boolean(trimString(env.ADMIN_TOKEN)),
+              inboundTokenPreview: maskToken(trimString(env.INBOUND_TOKEN)),
+              adminTokenPreview: maskToken(trimString(env.ADMIN_TOKEN)),
+              hasKvBinding:
+                Boolean(env.INQUIRIES) &&
+                typeof env.INQUIRIES.put === "function" &&
+                typeof env.INQUIRIES.get === "function" &&
+                typeof env.INQUIRIES.list === "function"
+            }
+          });
+        }
+
+        return json(
+          {
+            error: "Not found.",
+            routes: ["GET /health", "GET /setup", "POST /capture", "GET /inquiries"]
+          },
+          { status: 404 }
+        );
+      } catch (error) {
+        console.error("Unhandled worker error", error);
+
+        if (String(error?.message || "").includes("KV binding INQUIRIES")) {
+          return serviceUnavailable("KV binding INQUIRIES is missing or invalid.");
+        }
+
+        return json(
+          {
+            error: "Unhandled worker exception.",
+            detail: trimString(error?.message)
+          },
+          { status: 500 }
+        );
+      }
   }
 };
