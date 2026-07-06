@@ -4,11 +4,11 @@ export const homeProfile = {
   seoDescription:
     "Harbor Hearth Adult Family Home offers warm 24-hour residential care with clear family communication, personalized support, and easy tour scheduling.",
   tagline:
-    "A warm adult family home where 24-hour support feels personal, steady, and genuinely welcoming.",
+    "A warm adult family home where daily support feels personal, steady, and genuinely welcoming.",
   description:
-    "Harbor Hearth provides daily support in a calm residential setting designed for comfort, safety, and dignity. Families can learn about the home, get a feel for the environment, and decide whether a visit would be helpful.",
+    "Harbor Hearth provides daily support in a calm residential setting designed for comfort, safety, and dignity. Families can get a feel for the home, understand the care approach, and decide whether a visit would feel like the right next step.",
   story:
-    "Choosing care for a loved one can feel overwhelming. Harbor Hearth is built around a quieter, more personal experience where families can ask questions, understand the home’s approach, and feel confident about the next step.",
+    "Choosing care for a loved one can feel overwhelming. Harbor Hearth is built around a quieter, more personal experience where families can ask questions, understand the home’s approach, and feel more supported as they consider next steps.",
   city: "Shoreline, WA",
   subdomain: "harbor-hearth.afhcares.com",
   availability: "Now scheduling tours",
@@ -22,7 +22,7 @@ export const homeProfile = {
   brandPrimaryColor: "#2C64B7",
   neighborhoodNote: "A quiet residential setting near Shoreline and North Seattle",
   signatureNote:
-    "A smaller home setting can feel gentler, more personal, and easier to trust. That is the kind of care environment Harbor Hearth aims to provide every day.",
+    "A smaller home setting can feel gentler, more personal, and easier to trust. Harbor Hearth is meant to feel like a real home where residents are known, cared for, and treated with dignity each day.",
   quickFacts: [
     "Private room and companion room options",
     "24-hour support in a secure residential setting",

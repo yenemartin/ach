@@ -296,11 +296,14 @@ function ContactForm() {
         <textarea
           name="message"
           onChange={handleChange}
-          placeholder="Tell us a little about your loved one and what matters most."
+          placeholder="Tell us a little about your loved one, what support they need, and any questions you want to talk through."
           rows="5"
           value={formState.message}
         />
       </label>
+      <p className="form-note full-span">
+        We only use this information to respond to your inquiry and help you schedule a conversation or visit.
+      </p>
       <button className="button button-primary" disabled={submitState.pending} type="submit">
         {submitState.pending ? "Sending..." : "Request a tour"}
       </button>
@@ -582,7 +585,7 @@ export default function App() {
 
       <section className="hero reveal-up is-visible" data-reveal>
         <div className="hero-copy reveal-up is-visible" data-reveal>
-          <p className="eyebrow">Adult Family Home</p>
+          <p className="eyebrow">Adult Family Home In Shoreline</p>
           <h1>{homeProfile.name}</h1>
           <p className="hero-lede">{homeProfile.tagline}</p>
           <p className="hero-body">{homeProfile.description}</p>
@@ -609,8 +612,8 @@ export default function App() {
           <article className="hero-card hero-card-main reveal-right is-visible" data-reveal>
             <img alt="Bright adult family home living room" src={homeProfile.heroImage} />
             <div className="hero-card-copy">
-              <p>Shared spaces</p>
-              <strong>Comfort, dignity, and a calm daily rhythm</strong>
+              <p>First impression</p>
+              <strong>A peaceful residential setting families can picture right away</strong>
             </div>
           </article>
           <button
@@ -621,21 +624,21 @@ export default function App() {
           >
             <div className="hero-video-icon">▶</div>
             <div>
-              <p className="hero-video-label">Home tour feel</p>
-              <strong>See the environment before the first visit</strong>
+              <p className="hero-video-label">See the home</p>
+              <strong>Preview the setting before the first call or visit</strong>
             </div>
           </button>
           <article className="hero-card hero-card-accent reveal-up is-visible" data-reveal>
             <img alt="Peaceful bedroom" src={homeProfile.secondaryImage} />
             <div className="hero-card-copy">
-              <p>Private room options</p>
-              <strong>Quiet rooms designed for rest and ease</strong>
+              <p>Resident comfort</p>
+              <strong>Quiet rooms designed for rest, privacy, and ease</strong>
             </div>
           </article>
           <article className="hero-stat-card reveal-left is-visible" data-reveal>
-            <p className="hero-stat-label">Care approach</p>
+            <p className="hero-stat-label">Daily support</p>
             <strong>24/7 support</strong>
-            <span>Steady routines, clear communication, and a home that feels personal.</span>
+            <span>Steady routines, clear communication, and care that feels more personal than institutional.</span>
           </article>
         </div>
       </section>
@@ -668,7 +671,7 @@ export default function App() {
       <section className="content-section two-column reveal-up" data-reveal id="story">
         <div>
           <p className="eyebrow">About {homeProfile.brandName}</p>
-          <h2>A smaller home setting with a more personal pace of care.</h2>
+          <h2>A smaller care setting where families can feel the difference quickly.</h2>
           <p className="section-copy">{homeProfile.story}</p>
         </div>
         <div className="feature-grid">
@@ -689,29 +692,29 @@ export default function App() {
 
       <section className="content-section editorial-panel reveal-up" data-reveal>
         <div className="editorial-copy reveal-left" data-reveal>
-          <p className="eyebrow">Our approach</p>
-          <h2>We believe care should feel respectful, steady, and home-like.</h2>
+          <p className="eyebrow">What Families Notice</p>
+          <h2>Families are usually looking for warmth, clarity, and a setting that feels human.</h2>
           <p className="section-copy">
-            {homeProfile.brandName} is built around the idea that a home can offer both dependable support
-            and a genuine sense of warmth. Families should be able to see that in the environment,
-            hear it in the conversation, and feel it during a visit.
+            {homeProfile.brandName} is built around the idea that dependable support and genuine warmth
+            should show up in the same place. Families should be able to see that in the environment,
+            hear it in the first conversation, and feel it when they visit.
           </p>
         </div>
         <div className="editorial-aside reveal-right" data-reveal>
           <p>
-            We want residents to feel comfortable, families to feel informed, and daily life to
-            feel calm rather than rushed.
+            The goal is simple: residents should feel comfortable, families should feel informed,
+            and the home should feel calm rather than rushed.
           </p>
         </div>
       </section>
 
       <section className="content-section services-layout reveal-up" data-reveal>
         <div className="services-intro reveal-left" data-reveal>
-          <p className="eyebrow">What We Offer</p>
-          <h2>Care services presented in a way families can understand quickly.</h2>
+          <p className="eyebrow">Care And Support</p>
+          <h2>Clear support details, presented in a way families can understand quickly.</h2>
           <p className="section-copy">
-            Families usually want a clear sense of what daily support looks like. This section
-            gives them that picture without turning the site into a clinical checklist.
+            Families usually want a clear sense of what daily support actually looks like.
+            This section gives them that picture without turning the home into a clinical checklist.
           </p>
           <a className="button button-secondary" href="#gallery">
             Explore photo tour
@@ -736,8 +739,8 @@ export default function App() {
       <section className="content-section reveal-up" data-reveal>
         <div className="section-heading">
           <div>
-            <p className="eyebrow">Home life</p>
-            <h2>Daily life is shaped around comfort, routine, and connection.</h2>
+            <p className="eyebrow">Everyday Life</p>
+            <h2>Daily life is shaped around comfort, routine, and steady connection.</h2>
           </div>
         </div>
         <div className="lifestyle-grid">
@@ -758,10 +761,10 @@ export default function App() {
       <section className="content-section tour-spotlight reveal-up" data-reveal>
         <div className="tour-spotlight-copy reveal-left" data-reveal>
           <p className="eyebrow">Photo Tour</p>
-          <h2>Give families a stronger visual feel for the home before they ever visit.</h2>
+          <h2>Help families picture the home before they ever step through the door.</h2>
           <p className="section-copy">
-            The strongest care websites help families imagine the environment. Shared spaces,
-            bedrooms, and the exterior all do a lot of trust-building before the first call.
+            Strong care websites do more than describe services. They help families imagine the environment,
+            the atmosphere, and whether their loved one could feel comfortable there.
           </p>
           <div className="hero-actions">
             <a className="button button-primary" href="#gallery">
@@ -793,19 +796,19 @@ export default function App() {
           </article>
           <article className="atmosphere-note">
             <p className="eyebrow">A closer look</p>
-            <h3>Small details help families picture the day-to-day experience.</h3>
+            <h3>Small details often shape whether the home feels reassuring.</h3>
             <p>
               Natural light, clean shared spaces, and a comfortable room setup often matter just
-              as much as the written description.
+              as much as the written description when families are deciding whether to reach out.
             </p>
           </article>
         </div>
         <div className="atmosphere-copy reveal-right" data-reveal>
-          <p className="eyebrow">Why the presentation matters</p>
+          <p className="eyebrow">Why This Matters</p>
           <h2>The environment should feel visible, not just described.</h2>
           <p className="section-copy">
             Families often decide whether to call based on whether they can imagine their loved one
-            there. Stronger visual pacing, movement, and image-led sections make that easier.
+            there. Stronger visual pacing and image-led sections make that decision easier.
           </p>
           <div className="atmosphere-points">
             <div>
@@ -828,7 +831,7 @@ export default function App() {
         <div className="section-heading">
           <div>
             <p className="eyebrow">Getting started</p>
-            <h2>We try to make the process clear, personal, and pressure-free.</h2>
+            <h2>We try to make the first step clear, personal, and pressure-free.</h2>
           </div>
         </div>
         <div className="journey-grid">
@@ -857,7 +860,7 @@ export default function App() {
       <section className="content-section faq-layout reveal-up" data-reveal>
         <div>
           <p className="eyebrow">Frequently asked</p>
-          <h2>Questions families often ask early in the process.</h2>
+          <h2>Questions families often ask before they schedule a visit.</h2>
           <p className="section-copy">
             We want the first conversation to feel clear, comfortable, and helpful.
           </p>
@@ -880,9 +883,9 @@ export default function App() {
       <section className="content-section contact-layout reveal-up" data-reveal id="contact">
         <div className="contact-copy reveal-left" data-reveal>
           <p className="eyebrow">Contact</p>
-          <h2>Talk with us about your loved one and what kind of support they need.</h2>
+          <h2>Talk with us about your loved one, your timeline, and what kind of support they need.</h2>
           <p className="section-copy">
-            We’re happy to answer questions, talk through timing and care needs, and arrange a visit to the home.
+            We’re happy to answer questions, talk through care needs, and help you decide whether a visit to the home would be helpful.
           </p>
           <div className="contact-details">
             <p>

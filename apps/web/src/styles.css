@@ -1186,6 +1186,13 @@ h3 {
   line-height: 1.6;
 }
 
+.form-note {
+  margin: -2px 0 0;
+  color: var(--muted);
+  font-size: 0.88rem;
+  line-height: 1.6;
+}
+
 .success-text {
   color: color-mix(in srgb, var(--accent) 65%, #1f6f4a);
 }
