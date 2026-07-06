@@ -492,6 +492,8 @@ function GallerySection() {
 }
 
 export default function App() {
+  const [navPinned, setNavPinned] = useState(false);
+
   useEffect(() => {
     document.title = homeProfile.seoTitle;
 
@@ -538,9 +540,20 @@ export default function App() {
     return () => observer.disconnect();
   }, []);
 
+  useEffect(() => {
+    const handleScroll = () => {
+      setNavPinned(window.scrollY > 24);
+    };
+
+    handleScroll();
+    window.addEventListener("scroll", handleScroll, { passive: true });
+
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
   return (
     <main className="site-shell">
-      <header className="topbar reveal-up is-visible" data-reveal>
+      <header className={`topbar reveal-up is-visible ${navPinned ? "topbar-pinned" : ""}`} data-reveal>
         <div className="brand-lockup">
           {homeProfile.logo ? (
             <img className="brand-logo" alt={`${homeProfile.brandName} logo`} src={homeProfile.logo} />
@@ -593,6 +606,13 @@ export default function App() {
             <div className="hero-card-copy">
               <p>Shared spaces</p>
               <strong>Comfort, dignity, and a calm daily rhythm</strong>
+            </div>
+          </article>
+          <article className="hero-video-card reveal-up is-visible" data-reveal>
+            <div className="hero-video-icon">▶</div>
+            <div>
+              <p className="hero-video-label">Home tour feel</p>
+              <strong>See the environment before the first visit</strong>
             </div>
           </article>
           <article className="hero-card hero-card-accent reveal-up is-visible" data-reveal>
@@ -747,6 +767,44 @@ export default function App() {
           <div className="tour-spotlight-chip">
             <span>Photo highlights</span>
             <strong>{galleryImages.length} spaces to explore</strong>
+          </div>
+        </div>
+      </section>
+
+      <section className="content-section atmosphere-split reveal-up" data-reveal>
+        <div className="atmosphere-stack reveal-left" data-reveal>
+          <article className="atmosphere-card">
+            <img alt={galleryImages[1]?.alt || homeProfile.name} src={galleryImages[1]?.src || homeProfile.secondaryImage} />
+          </article>
+          <article className="atmosphere-note">
+            <p className="eyebrow">A closer look</p>
+            <h3>Small details help families picture the day-to-day experience.</h3>
+            <p>
+              Natural light, clean shared spaces, and a comfortable room setup often matter just
+              as much as the written description.
+            </p>
+          </article>
+        </div>
+        <div className="atmosphere-copy reveal-right" data-reveal>
+          <p className="eyebrow">Why the presentation matters</p>
+          <h2>The environment should feel visible, not just described.</h2>
+          <p className="section-copy">
+            Families often decide whether to call based on whether they can imagine their loved one
+            there. Stronger visual pacing, movement, and image-led sections make that easier.
+          </p>
+          <div className="atmosphere-points">
+            <div>
+              <strong>Calm rooms</strong>
+              <span>Spaces that feel settled and lived in</span>
+            </div>
+            <div>
+              <strong>Shared areas</strong>
+              <span>Places for conversation, meals, and routine</span>
+            </div>
+            <div>
+              <strong>Residential feel</strong>
+              <span>A home that feels personal instead of institutional</span>
+            </div>
           </div>
         </div>
       </section>
