@@ -4,11 +4,11 @@ export const homeProfile = {
   seoDescription:
     "Harbor Hearth Adult Family Home offers warm 24-hour residential care with clear family communication, personalized support, and easy tour scheduling.",
   tagline:
-    "A calm, beautifully kept adult family home where attentive 24-hour support feels personal, respectful, and genuinely welcoming.",
+    "A warm adult family home where 24-hour support feels personal, steady, and genuinely welcoming.",
   description:
-    "Harbor Hearth offers attentive daily support in a peaceful residential setting designed for comfort, safety, and dignity. Families can quickly understand the home environment, the care philosophy, and how to schedule a visit.",
+    "Harbor Hearth provides daily support in a calm residential setting designed for comfort, safety, and dignity. Families can learn about the home, get a feel for the environment, and decide whether a visit would be helpful.",
   story:
-    "Families are often making important decisions under pressure. Harbor Hearth is designed to communicate warmth, professionalism, and trust from the first few moments. The focus stays on a calm home environment, personalized support, and a simple path toward asking questions or arranging a tour.",
+    "Choosing care for a loved one can feel overwhelming. Harbor Hearth is built around a quieter, more personal experience where families can ask questions, understand the home’s approach, and feel confident about the next step.",
   city: "Shoreline, WA",
   availability: "Now scheduling tours",
   phone: "(206) 555-0186",
@@ -20,7 +20,7 @@ export const homeProfile = {
   brandInitials: "HH",
   neighborhoodNote: "A quiet residential setting near Shoreline and North Seattle",
   signatureNote:
-    "A smaller home environment can feel gentler, more personal, and easier to trust. Harbor Hearth is built around that feeling, with warmth, consistency, and respectful support.",
+    "A smaller home setting can feel gentler, more personal, and easier to trust. That is the kind of care environment Harbor Hearth aims to provide every day.",
   quickFacts: [
     "Private room and companion room options",
     "24-hour support in a secure residential setting",
@@ -47,22 +47,22 @@ export const defaultTheme = {
 
 export const careHighlights = [
   {
-    kicker: "Personalized support",
-    title: "Care is tailored to each resident’s daily needs and routines.",
+    kicker: "Daily care",
+    title: "Support is shaped around each resident’s needs and routine.",
     description:
-      "Harbor Hearth presents itself as the kind of home where daily support feels consistent, respectful, and thoughtfully adapted to each resident."
+      "Daily life is supported with patience, consistency, and attention to the details that help residents feel comfortable and settled."
   },
   {
-    kicker: "Safe home environment",
-    title: "The atmosphere feels calm, comfortable, and family-like.",
+    kicker: "Home environment",
+    title: "The atmosphere stays calm, comfortable, and residential.",
     description:
-      "The visuals and messaging are built to help families imagine a clean, steady, welcoming home where loved ones are treated with dignity and compassion."
+      "Families are often looking for a place that feels clean, steady, and welcoming rather than large or institutional."
   },
   {
-    kicker: "Clear next steps",
-    title: "Families can move from first impression to tour request without friction.",
+    kicker: "Family communication",
+    title: "Questions are welcomed and next steps stay simple.",
     description:
-      "The message stays simple and confident: learn about the home, understand the care philosophy, and reach out when it feels like the right fit."
+      "Families can reach out, talk through care needs, and arrange a visit without feeling rushed or overwhelmed."
   }
 ];
 
@@ -70,57 +70,57 @@ export const livingFeatures = [
   {
     title: "Comfortable shared spaces",
     description:
-      "Bright shared rooms, welcoming seating, and a residential layout that supports both quiet daily living and meaningful family visits."
+      "Shared living areas are designed to feel bright, welcoming, and easy for residents and visiting family members to enjoy."
   },
   {
     title: "Thoughtful daily routines",
     description:
-      "Consistency matters. Meals, personal care, medication support, and dependable routines all help residents feel secure and well cared for."
+      "Meals, personal care, medication support, and dependable routines all help create a steady rhythm that residents can rely on."
   },
   {
     title: "Open family communication",
     description:
-      "Families want reassurance that they will be kept informed. This section reinforces transparency, responsiveness, and a smooth introduction to the home."
+      "Families want to know they will be kept informed. Clear communication helps build trust from the very beginning."
   }
 ];
 
 export const experienceSteps = [
   {
     step: "01",
-    title: "Reach out for an initial conversation",
+    title: "Start with a conversation",
     description:
-      "Families can call, email, or request a visit to talk through care needs, timing, and the kind of home environment they want for a loved one."
+      "Families can call or email to talk through timing, care needs, and whether Harbor Hearth sounds like the right kind of home."
   },
   {
     step: "02",
-    title: "Tour the home and ask direct questions",
+    title: "Visit the home",
     description:
-      "The website should make that next step feel natural, with clear invitations to see the space, meet the caregivers, and understand the rhythm of care."
+      "A visit gives families the chance to see the rooms, ask direct questions, and get a feel for the home’s day-to-day environment."
   },
   {
     step: "03",
-    title: "Move forward only if it feels like a fit",
+    title: "Decide at your own pace",
     description:
-      "The tone stays calm and pressure-free. Trust is built through clarity, warmth, and honest communication."
+      "If the home feels like a fit, we can talk about next steps. If not, families should still leave with clarity and peace of mind."
   }
 ];
 
 export const galleryImages = [
   {
     title: "Welcoming exterior",
-    caption: "A residential setting designed to feel calm and approachable.",
+    caption: "A quiet residential setting with a calm, approachable feel.",
     alt: "Illustrated exterior view of Harbor Hearth Adult Family Home",
     src: "/brand/hero-home.svg"
   },
   {
     title: "Shared living room",
-    caption: "A bright common area for conversation and daily comfort.",
+    caption: "A bright common area for conversation, rest, and daily comfort.",
     alt: "Illustrated living room inside Harbor Hearth Adult Family Home",
     src: "/brand/living-room.svg"
   },
   {
     title: "Private room option",
-    caption: "A simple, restful room that feels residential instead of clinical.",
+    caption: "A simple, restful room designed to feel comfortable and home-like.",
     alt: "Illustrated private bedroom inside Harbor Hearth Adult Family Home",
     src: "/brand/bedroom.svg"
   }
@@ -128,16 +128,16 @@ export const galleryImages = [
 
 export const testimonials = [
   {
-    name: "Family Member",
+    name: "Martha L.",
     role: "Daughter of Resident",
     quote:
-      "From the first conversation, we felt supported and informed. The home came across as peaceful, welcoming, and much more personal than the larger places we had visited."
+      "From the first conversation, we felt at ease. The home felt peaceful, well cared for, and much more personal than the larger places we had visited."
   },
   {
-    name: "Family Member",
+    name: "Daniel R.",
     role: "Son of Resident",
     quote:
-      "What stood out most was the balance of warmth and professionalism. We could picture our loved one feeling safe, respected, and comfortable there."
+      "What stood out most was how calm everything felt. We could picture our loved one being safe, respected, and comfortable there."
   }
 ];
 
@@ -145,16 +145,16 @@ export const faqs = [
   {
     question: "Can families schedule a tour before making any commitment?",
     answer:
-      "Yes. Families can reach out with questions first and schedule a visit when they are ready to see the home environment in person."
+      "Yes. Families are welcome to reach out with questions first and schedule a visit when they are ready to see the home in person."
   },
   {
     question: "Do you list pricing on the website?",
     answer:
-      "Pricing is discussed during the conversation so we can focus first on care needs, room fit, and whether the home is the right match."
+      "Pricing is usually discussed during the conversation so we can focus first on care needs, room fit, and whether the home is the right match."
   },
   {
     question: "What should families expect during the first conversation?",
     answer:
-      "We talk through care needs, timing, daily routines, and any questions about the home environment so families can decide whether a tour makes sense."
+      "We talk through care needs, timing, daily routines, and any questions about the home so families can decide whether a visit makes sense."
   }
 ];

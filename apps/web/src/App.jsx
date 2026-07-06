@@ -320,21 +320,21 @@ export default function App() {
           <article className="hero-card hero-card-main">
             <img alt="Bright adult family home living room" src={homeProfile.heroImage} />
             <div className="hero-card-copy">
-              <p>Warm shared spaces</p>
-              <strong>Comfort, dignity, and everyday calm</strong>
+              <p>Shared spaces</p>
+              <strong>Comfort, dignity, and a calm daily rhythm</strong>
             </div>
           </article>
           <article className="hero-card hero-card-accent">
             <img alt="Peaceful bedroom" src={homeProfile.secondaryImage} />
             <div className="hero-card-copy">
               <p>Private room options</p>
-              <strong>Thoughtful design for daily ease</strong>
+              <strong>Quiet rooms designed for rest and ease</strong>
             </div>
           </article>
           <article className="hero-stat-card">
-            <p className="hero-stat-label">Family-first focus</p>
+            <p className="hero-stat-label">Care approach</p>
             <strong>24/7 support</strong>
-            <span>Clear communication, calm routines, and a home that feels personal.</span>
+            <span>Steady routines, clear communication, and a home that feels personal.</span>
           </article>
         </div>
       </section>
@@ -342,22 +342,22 @@ export default function App() {
       <section className="trust-strip">
         <div>
           <p className="trust-value">{homeProfile.city}</p>
-          <span>Quiet residential setting</span>
+          <span>Residential neighborhood setting</span>
         </div>
         <div>
           <p className="trust-value">{homeProfile.availability}</p>
-          <span>Updated manually for accuracy</span>
+          <span>Visits available by appointment</span>
         </div>
         <div>
           <p className="trust-value">{homeProfile.languages.join(", ")}</p>
-          <span>Family communication support</span>
+          <span>Language support for family communication</span>
         </div>
       </section>
 
       <section className="content-section two-column" id="story">
         <div>
-          <p className="eyebrow">Why families choose us</p>
-          <h2>Care that feels personal, clear, and reassuring from the first call.</h2>
+          <p className="eyebrow">About Harbor Hearth</p>
+          <h2>A smaller home setting with a more personal pace of care.</h2>
           <p className="section-copy">{homeProfile.story}</p>
         </div>
         <div className="feature-grid">
@@ -374,18 +374,17 @@ export default function App() {
       <section className="content-section editorial-panel">
         <div className="editorial-copy">
           <p className="eyebrow">Our approach</p>
-          <h2>Warmth, safety, and dignity should be visible before a family ever calls.</h2>
+          <h2>We believe care should feel respectful, steady, and home-like.</h2>
           <p className="section-copy">
-            The strongest adult family home websites do more than list features. They reduce
-            anxiety. They help a visitor imagine their loved one in a clean, calm, and respectful
-            setting, and they make the next step feel easy.
+            Harbor Hearth is built around the idea that a home can offer both dependable support
+            and a genuine sense of warmth. Families should be able to see that in the environment,
+            hear it in the conversation, and feel it during a visit.
           </p>
         </div>
         <div className="editorial-aside">
           <p>
-            Small details matter here: the tone of the copy, the softness of the colors, the
-            amount of breathing room, and the way contact actions stay visible without feeling
-            aggressive.
+            We want residents to feel comfortable, families to feel informed, and daily life to
+            feel calm rather than rushed.
           </p>
         </div>
       </section>
@@ -394,7 +393,7 @@ export default function App() {
         <div className="section-heading">
           <div>
             <p className="eyebrow">Home life</p>
-            <h2>A welcoming environment built around routine, connection, and comfort.</h2>
+            <h2>Daily life is shaped around comfort, routine, and connection.</h2>
           </div>
         </div>
         <div className="lifestyle-grid">
@@ -410,8 +409,8 @@ export default function App() {
       <section className="content-section journey-section">
         <div className="section-heading">
           <div>
-            <p className="eyebrow">What families experience</p>
-            <h2>A calmer, more guided path from first visit to real conversation.</h2>
+            <p className="eyebrow">Getting started</p>
+            <h2>We try to make the process clear, personal, and pressure-free.</h2>
           </div>
         </div>
         <div className="journey-grid">
@@ -429,9 +428,9 @@ export default function App() {
         <div className="section-heading">
           <div>
             <p className="eyebrow">Gallery</p>
-            <h2>Take a closer look at the spaces families care about most.</h2>
+            <h2>Take a look at the rooms and shared spaces that shape daily life.</h2>
           </div>
-          <p className="section-note">Comfort, cleanliness, and calm should be visible at a glance.</p>
+          <p className="section-note">Families often want to understand the feel of the home before they visit.</p>
         </div>
         <div className="gallery-grid">
           {galleryImages.map((image) => (
@@ -449,14 +448,13 @@ export default function App() {
       <section className="content-section testimonial-section">
         <div className="section-heading">
           <div>
-            <p className="eyebrow">Family confidence</p>
-            <h2>The site should make families feel safe reaching out.</h2>
+            <p className="eyebrow">What families notice</p>
+            <h2>Families often notice the feeling of a home before anything else.</h2>
           </div>
         </div>
         <div className="pull-quote">
           <p>
-            “From the first impression, families should feel the difference between a facility and
-            a true home.”
+            “A smaller home can feel more personal, more peaceful, and easier to trust.”
           </p>
         </div>
         <div className="testimonial-grid">
@@ -475,10 +473,9 @@ export default function App() {
       <section className="content-section faq-layout">
         <div>
           <p className="eyebrow">Frequently asked</p>
-          <h2>Keep answers simple, warm, and easy to scan.</h2>
+          <h2>Questions families often ask early in the process.</h2>
           <p className="section-copy">
-            These are some of the most common early questions families ask when they begin
-            exploring adult family home options.
+            We want the first conversation to feel clear, comfortable, and helpful.
           </p>
         </div>
         <div className="faq-list">
@@ -494,9 +491,9 @@ export default function App() {
       <section className="content-section contact-layout" id="contact">
         <div className="contact-copy">
           <p className="eyebrow">Contact</p>
-          <h2>Make the next step feel easy.</h2>
+          <h2>Talk with us about your loved one and what kind of support they need.</h2>
           <p className="section-copy">
-            Reach out to ask questions, talk through care needs, or arrange a tour of the home.
+            We’re happy to answer questions, talk through timing and care needs, and arrange a visit to the home.
           </p>
           <div className="contact-details">
             <p>
