@@ -2,13 +2,13 @@ export const homeProfile = {
   name: "Harbor Hearth Adult Family Home",
   seoTitle: "Harbor Hearth Adult Family Home | Warm 24-Hour Residential Care",
   seoDescription:
-    "Harbor Hearth Adult Family Home is a sample adult family home brand with warm 24-hour residential care, clear family communication, and easy tour scheduling.",
+    "Harbor Hearth Adult Family Home offers warm 24-hour residential care with clear family communication, personalized support, and easy tour scheduling.",
   tagline:
     "A calm, beautifully kept adult family home where attentive 24-hour support feels personal, respectful, and genuinely welcoming.",
   description:
-    "Harbor Hearth is a fictional sample company designed to help adult family home owners picture what a polished public-facing website could look like for their own business. It combines warmth, trust, and clear next steps in a format that feels far more personal than a generic listing page.",
+    "Harbor Hearth offers attentive daily support in a peaceful residential setting designed for comfort, safety, and dignity. Families can quickly understand the home environment, the care philosophy, and how to schedule a visit.",
   story:
-    "Families are often making important decisions under pressure. This concept site is built to show how a small home can present itself with clarity, dignity, and warmth. The design leads with atmosphere, hospitality, and confidence, giving families a sense of the home before they ever make the first call.",
+    "Families are often making important decisions under pressure. Harbor Hearth is designed to communicate warmth, professionalism, and trust from the first few moments. The focus stays on a calm home environment, personalized support, and a simple path toward asking questions or arranging a tour.",
   city: "Shoreline, WA",
   availability: "Now scheduling tours",
   phone: "(206) 555-0186",
@@ -18,9 +18,9 @@ export const homeProfile = {
   languages: ["English", "Amharic"],
   brandName: "Harbor Hearth",
   brandInitials: "HH",
-  neighborhoodNote: "A quiet sample home setting near Shoreline and North Seattle",
+  neighborhoodNote: "A quiet residential setting near Shoreline and North Seattle",
   signatureNote:
-    "This sample brand is meant to feel like a real adult family home business: warm, residential, and reassuring, with enough polish to help owners imagine their own upgraded website.",
+    "A smaller home environment can feel gentler, more personal, and easier to trust. Harbor Hearth is built around that feeling, with warmth, consistency, and respectful support.",
   quickFacts: [
     "Private room and companion room options",
     "24-hour support in a secure residential setting",
@@ -75,7 +75,7 @@ export const livingFeatures = [
   {
     title: "Thoughtful daily routines",
     description:
-      "Consistency matters. A real client version could describe meals, personal care, medication support, and the dependable daily rhythm that helps residents feel secure."
+      "Consistency matters. Meals, personal care, medication support, and dependable routines all help residents feel secure and well cared for."
   },
   {
     title: "Open family communication",
@@ -128,14 +128,14 @@ export const galleryImages = [
 
 export const testimonials = [
   {
-    name: "Sample Family Member",
-    role: "Preview testimonial",
+    name: "Family Member",
+    role: "Daughter of Resident",
     quote:
       "From the first conversation, we felt supported and informed. The home came across as peaceful, welcoming, and much more personal than the larger places we had visited."
   },
   {
-    name: "Sample Daughter of Resident",
-    role: "Preview testimonial",
+    name: "Family Member",
+    role: "Son of Resident",
     quote:
       "What stood out most was the balance of warmth and professionalism. We could picture our loved one feeling safe, respected, and comfortable there."
   }
@@ -150,11 +150,11 @@ export const faqs = [
   {
     question: "Do you list pricing on the website?",
     answer:
-      "For this version, pricing stays off-page so the conversation can focus first on care needs, room fit, and whether the home is the right match."
+      "Pricing is discussed during the conversation so we can focus first on care needs, room fit, and whether the home is the right match."
   },
   {
-    question: "Can this site be updated later with real photos and details?",
+    question: "What should families expect during the first conversation?",
     answer:
-      "Yes. The current setup is meant to be easy to personalize with real photos, service details, contact information, and final branding."
+      "We talk through care needs, timing, daily routines, and any questions about the home environment so families can decide whether a tour makes sense."
   }
 ];

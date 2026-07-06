@@ -429,9 +429,9 @@ export default function App() {
         <div className="section-heading">
           <div>
             <p className="eyebrow">Gallery</p>
-            <h2>Use this section for real home photos once they’re ready.</h2>
+            <h2>Take a closer look at the spaces families care about most.</h2>
           </div>
-          <p className="section-note">Prototype images are placeholders for layout and mood.</p>
+          <p className="section-note">Comfort, cleanliness, and calm should be visible at a glance.</p>
         </div>
         <div className="gallery-grid">
           {galleryImages.map((image) => (
@@ -455,8 +455,8 @@ export default function App() {
         </div>
         <div className="pull-quote">
           <p>
-            “The best version of this site should feel less like a facility search result and more
-            like being welcomed into a well-kept home.”
+            “From the first impression, families should feel the difference between a facility and
+            a true home.”
           </p>
         </div>
         <div className="testimonial-grid">
@@ -477,8 +477,8 @@ export default function App() {
           <p className="eyebrow">Frequently asked</p>
           <h2>Keep answers simple, warm, and easy to scan.</h2>
           <p className="section-copy">
-            This is enough for a first launch. We can swap in real answers, photos, and location
-            details before the client meeting.
+            These are some of the most common early questions families ask when they begin
+            exploring adult family home options.
           </p>
         </div>
         <div className="faq-list">
@@ -496,8 +496,7 @@ export default function App() {
           <p className="eyebrow">Contact</p>
           <h2>Make the next step feel easy.</h2>
           <p className="section-copy">
-            For the no-backend version, this form opens the visitor’s email app with the inquiry
-            already filled out. We can replace it with a hosted form later if you want.
+            Reach out to ask questions, talk through care needs, or arrange a tour of the home.
           </p>
           <div className="contact-details">
             <p>
