@@ -87,6 +87,45 @@ export const serviceHighlights = [
   "Calm Daily Routine"
 ];
 
+export const serviceOfferings = [
+  {
+    label: "Personal care",
+    title: "Help with daily routines",
+    description:
+      "Support with dressing, hygiene, mobility, and the everyday tasks that help residents feel comfortable and well cared for."
+  },
+  {
+    label: "Home meals",
+    title: "Meals with a home rhythm",
+    description:
+      "Daily meals are part of the home's routine, helping residents feel settled while giving families a clearer picture of day-to-day life."
+  },
+  {
+    label: "Medication",
+    title: "Steady medication support",
+    description:
+      "Medication reminders and household routines are handled with consistency so families feel more confident about daily care."
+  },
+  {
+    label: "Mobility",
+    title: "Calm assistance and transfers",
+    description:
+      "Residents who need extra support moving through the day can receive steady help in a smaller, more manageable environment."
+  },
+  {
+    label: "Communication",
+    title: "Clear family updates",
+    description:
+      "Families want to know how things are going. Clear communication helps the home feel more trustworthy from the start."
+  },
+  {
+    label: "Environment",
+    title: "A quieter residential setting",
+    description:
+      "The goal is to offer an environment that feels peaceful, personal, and easier to picture than a larger facility."
+  }
+];
+
 export const livingFeatures = [
   {
     title: "Comfortable shared spaces",

@@ -11,6 +11,7 @@ const {
   galleryImages,
   homeProfile,
   serviceHighlights,
+  serviceOfferings,
   livingFeatures
 } = selectedHome;
 
@@ -674,6 +675,34 @@ export default function App() {
         </div>
       </section>
 
+      <section className="content-section services-layout reveal-up" data-reveal>
+        <div className="services-intro reveal-left" data-reveal>
+          <p className="eyebrow">What We Offer</p>
+          <h2>Care services presented in a way families can understand quickly.</h2>
+          <p className="section-copy">
+            Families usually want a clear sense of what daily support looks like. This section
+            gives them that picture without turning the site into a clinical checklist.
+          </p>
+          <a className="button button-secondary" href="#gallery">
+            Explore photo tour
+          </a>
+        </div>
+        <div className="services-grid">
+          {serviceOfferings.map((item, index) => (
+            <article
+              key={item.title}
+              className="service-card reveal-up"
+              data-reveal
+              style={{ "--reveal-delay": `${index * 70}ms` }}
+            >
+              <span className="service-card-label">{item.label}</span>
+              <h3>{item.title}</h3>
+              <p>{item.description}</p>
+            </article>
+          ))}
+        </div>
+      </section>
+
       <section className="content-section reveal-up" data-reveal>
         <div className="section-heading">
           <div>
@@ -693,6 +722,32 @@ export default function App() {
               <p>{item.description}</p>
             </article>
           ))}
+        </div>
+      </section>
+
+      <section className="content-section tour-spotlight reveal-up" data-reveal>
+        <div className="tour-spotlight-copy reveal-left" data-reveal>
+          <p className="eyebrow">Photo Tour</p>
+          <h2>Give families a stronger visual feel for the home before they ever visit.</h2>
+          <p className="section-copy">
+            The strongest care websites help families imagine the environment. Shared spaces,
+            bedrooms, and the exterior all do a lot of trust-building before the first call.
+          </p>
+          <div className="hero-actions">
+            <a className="button button-primary" href="#gallery">
+              View photo gallery
+            </a>
+            <a className="button button-secondary" href="#contact">
+              Ask about a tour
+            </a>
+          </div>
+        </div>
+        <div className="tour-spotlight-media reveal-right" data-reveal>
+          <img alt={galleryImages[0]?.alt || homeProfile.name} src={galleryImages[0]?.src || homeProfile.heroImage} />
+          <div className="tour-spotlight-chip">
+            <span>Photo highlights</span>
+            <strong>{galleryImages.length} spaces to explore</strong>
+          </div>
         </div>
       </section>
 

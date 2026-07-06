@@ -7,6 +7,7 @@ import {
   galleryImages,
   homeProfile,
   serviceHighlights,
+  serviceOfferings,
   livingFeatures
 } from "./harbor-hearth";
 import * as cedarGrove from "./cedar-grove";
@@ -21,6 +22,7 @@ export const homes = {
     defaultTheme,
     careHighlights,
     serviceHighlights,
+    serviceOfferings,
     livingFeatures,
     experienceSteps,
     galleryImages,

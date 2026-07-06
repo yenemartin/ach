@@ -87,6 +87,45 @@ export const serviceHighlights = [
   "Visit By Appointment"
 ];
 
+export const serviceOfferings = [
+  {
+    label: "Personal care",
+    title: "Daily support with a steady pace",
+    description:
+      "Residents receive help with daily needs in a way that feels calm, respectful, and consistent from one day to the next."
+  },
+  {
+    label: "Meals",
+    title: "Comfortable daily routine",
+    description:
+      "Meals, household rhythm, and regular routines help the home feel settled and easier for families to understand."
+  },
+  {
+    label: "Medication",
+    title: "Medication support built into the day",
+    description:
+      "Support is woven into the home's daily flow so residents and families can rely on a more predictable routine."
+  },
+  {
+    label: "Mobility",
+    title: "Help that fits the home setting",
+    description:
+      "A smaller home can make mobility support feel more manageable and more personal for residents who need extra assistance."
+  },
+  {
+    label: "Family contact",
+    title: "Families stay informed",
+    description:
+      "Questions and updates are part of the process, helping families feel clearer and more comfortable from the beginning."
+  },
+  {
+    label: "Home feel",
+    title: "Quiet spaces with a residential feel",
+    description:
+      "The setting is meant to feel approachable, comfortable, and easier to imagine as home."
+  }
+];
+
 export const livingFeatures = [
   {
     title: "Comfortable common areas",

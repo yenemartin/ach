@@ -545,6 +545,7 @@ h3 {
 .feature-card,
 .lifestyle-card,
 .faq-card,
+.service-card,
 .contact-card {
   border: 1px solid var(--line);
   border-radius: 24px;
@@ -553,7 +554,8 @@ h3 {
 
 .feature-card,
 .lifestyle-card,
-.faq-card {
+.faq-card,
+.service-card {
   padding: 22px;
   transition: transform 220ms ease, box-shadow 220ms ease, border-color 220ms ease;
 }
@@ -561,6 +563,7 @@ h3 {
 .feature-card:hover,
 .lifestyle-card:hover,
 .faq-card:hover,
+.service-card:hover,
 .journey-card:hover,
 .editorial-aside:hover,
 .contact-card:hover {
@@ -590,6 +593,67 @@ h3 {
   margin-bottom: 0;
   color: var(--muted);
   line-height: 1.75;
+}
+
+.services-layout,
+.tour-spotlight {
+  display: grid;
+  grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr);
+  gap: 24px;
+  align-items: start;
+}
+
+.services-intro,
+.tour-spotlight-copy {
+  position: sticky;
+  top: 24px;
+}
+
+.services-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.service-card {
+  position: relative;
+  overflow: hidden;
+  min-height: 206px;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.82), rgba(255, 255, 255, 0.54)),
+    var(--surface-strong);
+}
+
+.service-card::before {
+  content: "";
+  position: absolute;
+  inset: auto -48px -48px auto;
+  width: 130px;
+  height: 130px;
+  border-radius: 50%;
+  background: radial-gradient(circle, color-mix(in srgb, var(--accent) 18%, white), transparent 72%);
+  opacity: 0.8;
+}
+
+.service-card-label {
+  display: inline-flex;
+  margin-bottom: 14px;
+  padding: 8px 12px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.78);
+  border: 1px solid var(--line);
+  color: var(--accent-strong);
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.service-card p {
+  position: relative;
+  margin-bottom: 0;
+  color: var(--muted);
+  line-height: 1.72;
 }
 
 .feature-kicker {
@@ -888,6 +952,56 @@ h3 {
   line-height: 1.75;
 }
 
+.tour-spotlight {
+  background:
+    linear-gradient(135deg, rgba(255, 255, 255, 0.46), rgba(255, 255, 255, 0)),
+    var(--surface);
+}
+
+.tour-spotlight-media {
+  position: relative;
+  overflow: hidden;
+  border-radius: 28px;
+  border: 1px solid var(--line);
+  background: var(--surface-strong);
+  min-height: 440px;
+}
+
+.tour-spotlight-media img {
+  height: 100%;
+  min-height: 440px;
+  object-fit: cover;
+  transition: transform 320ms ease;
+}
+
+.tour-spotlight-media:hover img {
+  transform: scale(1.03);
+}
+
+.tour-spotlight-chip {
+  position: absolute;
+  left: 22px;
+  bottom: 22px;
+  display: grid;
+  gap: 6px;
+  padding: 16px 18px;
+  border-radius: 20px;
+  background: rgba(10, 18, 30, 0.74);
+  color: #eef5ff;
+  box-shadow: 0 18px 34px rgba(0, 0, 0, 0.16);
+}
+
+.tour-spotlight-chip span {
+  font-size: 0.82rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.tour-spotlight-chip strong {
+  font-family: "Fraunces", serif;
+  font-size: 1.05rem;
+}
+
 .contact-form {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -1005,6 +1119,8 @@ h3 {
 @media (max-width: 980px) {
   .hero,
   .editorial-panel,
+  .services-layout,
+  .tour-spotlight,
   .two-column,
   .contact-layout,
   .faq-layout,
@@ -1014,6 +1130,10 @@ h3 {
   .journey-grid,
   .gallery-experience,
   .hero-visual {
+    grid-template-columns: 1fr;
+  }
+
+  .services-grid {
     grid-template-columns: 1fr;
   }
 
@@ -1033,6 +1153,11 @@ h3 {
 
   .gallery-thumb {
     grid-template-columns: 88px minmax(0, 1fr);
+  }
+
+  .services-intro,
+  .tour-spotlight-copy {
+    position: static;
   }
 
   .care-marquee-track {
@@ -1103,6 +1228,11 @@ h3 {
 
   .gallery-thumb img {
     height: 140px;
+  }
+
+  .tour-spotlight-media,
+  .tour-spotlight-media img {
+    min-height: 280px;
   }
 
   h1 {
