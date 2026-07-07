@@ -1201,6 +1201,33 @@ h3 {
   color: #b33b3b;
 }
 
+.site-footer {
+  padding: 20px 8px 0;
+  text-align: center;
+}
+
+.site-footer p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.92rem;
+  line-height: 1.6;
+}
+
+.site-footer strong {
+  color: var(--text);
+  font-family: "Fraunces", serif;
+  font-weight: 600;
+}
+
+.site-footer a {
+  color: var(--accent-strong);
+  text-decoration: none;
+}
+
+.site-footer a:hover {
+  text-decoration: underline;
+}
+
 .reveal-up,
 .reveal-left,
 .reveal-right {

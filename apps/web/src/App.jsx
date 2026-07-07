@@ -903,6 +903,13 @@ export default function App() {
           <ContactForm />
         </div>
       </section>
+
+      <footer className="site-footer">
+        <p>
+          Developed By <strong>MirtnehM</strong>{" "}
+          <a href="mailto:yenemartin@gmail.com">yenemartin@gmail.com</a>
+        </p>
+      </footer>
     </main>
   );
 }
