@@ -23,6 +23,7 @@ function validatePayload(payload) {
   const homeKey = trimString(payload.homeKey);
   const homeName = trimString(payload.homeName);
   const homeSubdomain = trimString(payload.homeSubdomain);
+  const contactEmail = trimString(payload.contactEmail);
   const name = trimString(payload.name);
   const phone = trimString(payload.phone);
   const email = trimString(payload.email);
@@ -38,6 +39,10 @@ function validatePayload(payload) {
     return { error: "Name is required." };
   }
 
+  if (!contactEmail || !isEmail(contactEmail)) {
+    return { error: "A valid contact email is required." };
+  }
+
   if (!email || !isEmail(email)) {
     return { error: "A valid email is required." };
   }
@@ -51,6 +56,7 @@ function validatePayload(payload) {
       homeKey,
       homeName,
       homeSubdomain,
+      contactEmail,
       inquiryType,
       name,
       phone,

@@ -62,6 +62,7 @@ Quick guide:
 
 - [docs/deploy-cloudflare-pages.md](C:/Users/mirth/OneDrive/Documents/restaurant%20web%20service/ach/docs/deploy-cloudflare-pages.md)
 - [docs/cloudflare-inquiry-worker.md](C:/Users/mirth/OneDrive/Documents/restaurant%20web%20service/ach/docs/cloudflare-inquiry-worker.md)
+- [docs/email-notifications.md](C:/Users/mirth/OneDrive/Documents/restaurant%20web%20service/ach/docs/email-notifications.md)
 - [docs/onboarding-a-home.md](C:/Users/mirth/OneDrive/Documents/restaurant%20web%20service/ach/docs/onboarding-a-home.md)
 
 ## Next Best Improvements

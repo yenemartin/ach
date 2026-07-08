@@ -31,6 +31,7 @@ function validateInquiry(payload) {
   const homeKey = trimString(payload.homeKey);
   const homeName = trimString(payload.homeName);
   const homeSubdomain = trimString(payload.homeSubdomain);
+  const contactEmail = trimString(payload.contactEmail);
   const inquiryType = trimString(payload.inquiryType) || "tour_request";
   const name = trimString(payload.name);
   const phone = trimString(payload.phone);
@@ -47,6 +48,10 @@ function validateInquiry(payload) {
     return { error: "Name is required." };
   }
 
+  if (!contactEmail || !isEmail(contactEmail)) {
+    return { error: "A valid contact email is required." };
+  }
+
   if (!email || !isEmail(email)) {
     return { error: "A valid email is required." };
   }
@@ -61,6 +66,7 @@ function validateInquiry(payload) {
       homeKey,
       homeName,
       homeSubdomain,
+      contactEmail,
       inquiryType,
       name,
       phone,
@@ -121,6 +127,40 @@ async function listInquiries(env, limit) {
   return items.filter(Boolean);
 }
 
+async function sendNotification(env, inquiry) {
+  const webhookUrl = trimString(env.EMAIL_NOTIFICATION_WEBHOOK_URL);
+
+  if (!webhookUrl) {
+    return { delivered: false, skipped: true };
+  }
+
+  const notificationToken = trimString(env.EMAIL_NOTIFICATION_TOKEN);
+  const headers = {
+    Accept: "application/json",
+    "Content-Type": "application/json"
+  };
+
+  if (notificationToken) {
+    headers.Authorization = `Bearer ${notificationToken}`;
+  }
+
+  const response = await fetch(webhookUrl, {
+    method: "POST",
+    headers,
+    body: JSON.stringify({
+      type: "afhcares_inquiry",
+      recipientEmail: inquiry.contactEmail,
+      inquiry
+    })
+  });
+
+  if (!response.ok) {
+    throw new Error(`Notification webhook failed with status ${response.status}`);
+  }
+
+  return { delivered: true, skipped: false };
+}
+
 function getRoute(request) {
   const url = new URL(request.url);
   return `${request.method.toUpperCase()} ${url.pathname.replace(/\/+$/, "") || "/"}`;
@@ -162,6 +202,7 @@ export default {
 
           const inquiry = validated.value;
           const storageKey = await storeInquiry(env, inquiry);
+          const notification = await sendNotification(env, inquiry);
 
           return json({
             ok: true,
@@ -170,7 +211,8 @@ export default {
               homeKey: inquiry.homeKey,
               submittedAt: inquiry.submittedAt
             },
-            storageKey
+            storageKey,
+            notification
           });
         }
 
@@ -205,6 +247,8 @@ export default {
               hasAdminToken: Boolean(trimString(env.ADMIN_TOKEN)),
               inboundTokenPreview: maskToken(trimString(env.INBOUND_TOKEN)),
               adminTokenPreview: maskToken(trimString(env.ADMIN_TOKEN)),
+              hasEmailNotificationWebhook: Boolean(trimString(env.EMAIL_NOTIFICATION_WEBHOOK_URL)),
+              hasEmailNotificationToken: Boolean(trimString(env.EMAIL_NOTIFICATION_TOKEN)),
               hasKvBinding:
                 Boolean(env.INQUIRIES) &&
                 typeof env.INQUIRIES.put === "function" &&
@@ -226,6 +270,10 @@ export default {
 
         if (String(error?.message || "").includes("KV binding INQUIRIES")) {
           return serviceUnavailable("KV binding INQUIRIES is missing or invalid.");
+        }
+
+        if (String(error?.message || "").includes("Notification webhook failed")) {
+          return serviceUnavailable("Inquiry stored, but email notification failed.");
         }
 
         return json(

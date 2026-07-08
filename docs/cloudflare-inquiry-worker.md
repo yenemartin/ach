@@ -2,13 +2,14 @@
 
 This is the lowest-cost lead-capture option in the current stack.
 
-Instead of paying for a third-party form tool, the Pages site can forward inquiries to a small Cloudflare Worker that stores them in Cloudflare KV.
+Instead of paying for a third-party form tool, the Pages site can forward inquiries to a small Cloudflare Worker that stores them in Cloudflare KV and optionally triggers email notifications.
 
 ## What It Does
 
 - accepts inquiry submissions from the Pages function
 - stores each inquiry in KV
 - gives you a protected JSON endpoint to review recent inquiries
+- can forward each inquiry to an email notification webhook
 - avoids adding AWS or a paid monthly form service
 
 Worker source:
@@ -27,6 +28,10 @@ Worker source:
   - simple health check
 - `GET /setup`
   - confirms whether secrets are present
+
+If you want email delivery to the home's contact email, also see:
+
+- `docs/email-notifications.md`
 
 ## 1. Create A KV Namespace
 
@@ -79,6 +84,11 @@ Example shape:
 INBOUND_TOKEN = 6f3a1c9c4d5e7a8b9c0d1e2f3a4b5c6d
 ADMIN_TOKEN   = 2d9f7a1b8c4e6f0a3d5c7b9e1f2a4c6e
 ```
+
+Optional email variables:
+
+- `EMAIL_NOTIFICATION_WEBHOOK_URL`
+- `EMAIL_NOTIFICATION_TOKEN`
 
 ## 4. Set The Pages Environment Variable
 
@@ -146,6 +156,7 @@ The Worker expects the same payload already sent by the Pages function:
 
 ## Notes
 
-- This is storage-first, not email-first
+- This is storage-first by default
+- It can also send email notifications when `EMAIL_NOTIFICATION_WEBHOOK_URL` is configured
 - It is good for low-cost launch and demos
-- Later, the Worker can also forward inquiries to email, Slack, or another automation target
+- Later, the Worker can also forward inquiries to Slack or another automation target

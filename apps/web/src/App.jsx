@@ -205,6 +205,7 @@ function ContactForm() {
       homeKey: selectedHome.key,
       homeName: homeProfile.name,
       homeSubdomain: selectedHome.subdomain,
+      contactEmail: homeProfile.email,
       inquiryType: "tour_request",
       name: formState.name,
       phone: formState.phone,

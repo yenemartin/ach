@@ -242,6 +242,7 @@ https://afhcares-inquiry-worker.<your-workers-subdomain>.workers.dev/capture?tok
 More detail:
 
 - `docs/cloudflare-inquiry-worker.md`
+- `docs/email-notifications.md`
 
 ## Step 9. Cloudflare Pages Custom Domain
 
